@@ -3,11 +3,11 @@ package w1129;
 //한 사람분의 주급계산에 필요한 데이터를 담는다.
 public class WeekPay {
 		String name;
-		int per_pay;
-		int work_time;
-		int base_pay;
-		int over_pay;
-		int total_pay;
+		int per_pay; //급여단가
+		int work_time; //일한 시간
+		int base_pay; //기본급여
+		int over_pay; //추가수당
+		int total_pay; //전체급여
 		
 	//클래스 안에서 마우스 오른쪽 버튼 - source - Generate Constructors from Superclass
 	// 기본 생성자 만들기
@@ -26,7 +26,7 @@ public class WeekPay {
 		this.work_time = work_time;
 	}
 	
-	//급여게산 함수 작성하기
+	//급여계산 함수 작성하기
 	public void process() {
 		base_pay = this.per_pay * this.work_time;
 		over_pay = 0;
