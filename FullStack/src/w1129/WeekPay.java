@@ -26,5 +26,23 @@ public class WeekPay {
 		this.work_time = work_time;
 	}
 	
+	//급여게산 함수 작성하기
+	public void process() {
+		base_pay = this.per_pay * this.work_time;
+		over_pay = 0;
+		if(work_time>20) {
+			over_pay = (int)((work_time-20) * per_pay*0.5);
+		}
+		total_pay = base_pay + over_pay;
+	}
+
+	public void output() {
+		System.out.printf("%s\t", name);
+		System.out.printf("%s\t", work_time);
+		System.out.printf("%s\t", per_pay);
+		System.out.printf("%s\t", base_pay);
+		System.out.printf("%s\t", over_pay);
+		System.out.printf("%s\n", total_pay);
+	}
 }
 
