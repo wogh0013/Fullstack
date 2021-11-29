@@ -26,7 +26,7 @@ class Person{ // 클래스명 첫 글자는 대문자 !
 		//this - 참조자, 내 거, 변수만 그냥 써도 this 참조자가 있는 거로 안다.
 		this.name = name;
 		this.age = age;
-		this.phone = phone; 
+		this.phone = phone;
 		this.address = address;
 		System.out.println("매개변수가 있는 생성자가 호출되었음");
 	}
