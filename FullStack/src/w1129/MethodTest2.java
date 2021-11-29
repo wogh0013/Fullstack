@@ -18,7 +18,7 @@ class MyMethod{
 				System.out.println(x + "*" + i + " = " + result);
 		}
 	}
-}
+} 
 
 
 public class MethodTest2 {
