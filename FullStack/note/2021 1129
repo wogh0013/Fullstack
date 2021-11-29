@@ -16,3 +16,19 @@
 메소드 구조 
 반환형 메소드명 (매개변수)
 int add(int x, int y)
+
+
+
+
+ㅡㅡㅡㅡㅡ
+한 명분의 데이터를 담아둘 클래스
+WeekPay   -----------------> WeekPayManager -----------------> Project
+String name;                WeekPay 여러 개                  WeekPayManager mgr;
+int per_pay;                데이터를 저장 or
+int work_time;              출력 or 수정 or 검색
+int base_pay;               append()
+int over_pay;               output()
+int total_pay;
+변수선언,
+생성자를 만들고,
+출력하고, 계산하기
