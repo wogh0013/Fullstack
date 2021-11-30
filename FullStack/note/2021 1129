@@ -33,9 +33,6 @@ int per_pay;                데이터를 저장 or
 int work_time;              출력 or 수정 or 검색
 int base_pay;               append()
 int over_pay;               output()
-
-
-
 int total_pay;
 변수선언,
 생성자를 만들고,
