@@ -11,15 +11,15 @@ public class NumberGame {
 	// Wrapper class : 값타입 -> 참조로 전환시키는 클래스 (값을 둘러싸서 참조로 변환시켜줌)
 	boolean match = false; //맞혔는지 여부
 	int count=0;
+	Scanner sc = new Scanner(System.in);
 	
 	public NumberGame() {
 		super();
 		Random rand = new Random();
-		computer = rand.nextInt((10)+1);
+		computer = rand.nextInt(10)+1;
 	}
 	
 	public void start() {
-		Scanner sc = new Scanner(System.in);
 		
 		while(!match && count<5) {
 			System.out.print("숫자 : ");
@@ -38,6 +38,5 @@ public class NumberGame {
 			System.out.printf("%d번 만에 맞혔습니다.\n" , count);
 		else
 			System.out.println("아쉽습니다. 기회를 다 사용했습니다.");
-		sc.close();
 	}
 }
