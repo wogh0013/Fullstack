@@ -1,4 +1,4 @@
-package w1130Q;
+package w1130Score;
 import java.util.ArrayList;
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package w1130Q;
+package w1130Score;
 
 public class ScoreProject {
 	public static void main(String[] args) {
