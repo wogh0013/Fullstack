@@ -1,0 +1,150 @@
+이전 파일시스템의 문제점에서 출발함
+
+파일시스템의 단점
+1. 특정 프로그램에 종속된다.
+2. 일관성이 없다. 파일들이 서로 유기적인 관계가 있지 않아서,
+   특정 파일만 수정하다보면 다른 파일은 수정이 되지 않는 문제 발생.
+    ex) 학생의 자료 저장
+        학적 관련 -> 학적부 파일에 저장, 성적 관련 -> 성적 파일에 저장
+        각 파일은 서로 유기적인 관계 x
+         -> A라는 학생 휴학 -> 학적부 파일과 성적 파일 각각에 휴학임을 표시해야 함
+         -> 프로그램 복잡 or 사람의 실수 or 낮은 보안성
+         -> 파일을 실수로 삭제하거나 수정할 수 있음
+             └ 즉, 일관성의 결여가 파일시스템의 가장 큰 단점이었다.
+
+관계형 데이터베이스 - 데이터 관리가 주목적인 시스템
+     ㄴ DBMS(데이터를 관리하는 시스템)를 만듦. DataBase Management System
+       └ 데이터의 집합인 데이터베이스를 잘 관리하고 운영하기 위한 시스템
+ └ Oracle : 오라클사, Best
+ └ MSSQL : MS사, 그래픽툴
+ └ MySQL : 현재 오라클사에 합병
+ └ MariaDB : MySQL 사람들이 만듦, 실무
+ └ Tibero : 티맥스, 오라클 벤치마킹
+ └ Cubid : 공짜
+
+ 데이터베이스
+ 서버 프로그램                          클라이언트 프로그램
+ 내 컴퓨터에 등록돼서 작동 중임
+ 백그라운드
+
+SQL(Structured Query Language)
+ - DBMS에 데이터 구축/관리/활용을 위해서 사용되는 언어
+ - 관계형 데이터베이스에서 사용하는 언어
+
+관계형 DBMS
+ - DB는 Table이라는 최소 단위로 구성
+ - 유지보수, 데이터 관리, 데이터 무결성 Good
+
+https://www.heidisql.com/download.php#google_vignette
+
+
+ 환경변수 Path에 경로 추가해줘야 함.
+  C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+콘솔(cmd)에서 mysql client 작동하기
+만약 포트번호가 다를 경우, 반드시 적어줘야 함
+ -> mysql -u root -p    --port=3306
+
+
+1. 데이터베이스 만들기 (이름 : mydb)
+create database (DB명) default character set utf8 collate utf8_general_ci;
+                          └                 한글 지원                  ┘    
+
+2. 계정 만들어서 권한 부여하기 -> mysql은 한 번에 가능
+    1) 계정 만들기
+     create user 'user01@localhost' identified by '1234';
+    2) 권한 부여하기
+     grant all privileges on mydb.* to 'user01@localhost'; 
+     --사용자 계정으로 들어갈 때 계정은 user01@localhost
+
+     mysql -u user01@localhost -p --port=3306
+
+     시작 - cmd
+     명령프롬프트 - 관리자 권한으로 실행
+     mysql -u root -p --port=3306
+
+    use mydb
+    source c:/data/demobld.sql
+
+    show tables;
+
+    데이터베이스 - 데이터 저장 시 오류가 안 나도록 몇 가지 장치가 있음
+                    └ 제약조건
+                        primary key : 중복 X, null값 X
+                        foreign key : 두 개 테이블이 특정필드의 값으로 연동됨
+                        unique : 중복 X, null값 O
+                        null 허용x 
+                        범위체크
+
+
+
+
+
+
+시작 : cmd 관리자 권한으로 실행
+
+mysql -u root -p    --port=3306
+
+create database mydb default character set utf8 collate utf8_general_ci;
+
+source c:/data/mysqlsampledatabase.sql
+
+(밑 3개 명령어는 mysql 전용)
+show databases;
+use classicmodels;
+show tables;
+
+select * from employees;
+
+
+--
+시작 : cmd 관리자 권한으로 실행
+
+mysql -u root -p    --port=3306
+
+source C:\employees\employees.sql
+
+show databases; 
+use employees;
+show tables;
+
+select * from employees;
+
+-- limit 명령어는 mysql에만 있다.
+select * from employees limit 1000;
+
+
+
+
+필드명          타입
+emp_no          int                 NO      PRI
+birth_date      date                NO
+first_name      varchar(14)         NO
+last_name       varchar(16)         NO
+gender          enum('M', 'F')      NO
+hire_datadate   date                NO
+
+char (크기) 
+ - 고정 크기를 확보한다. 
+ - 어떤 경우엔 2글자, 어떤 경우엔 200글자가 들어온다면 메모리 200을 확보한다
+    └ 그래서 DB에서 char로 확보하는 경우 -> 고정크기가 필요할 때 
+                                  ex) 우편번호, 성별, 주민번호, 학번, 사번...
+
+varchar(variant char, 가변 배열)
+ - 실제 데이터 크기만큼 메모리 확보                                                    
+ - 앞부분에 6 byte 정도 자신의 길이를 저장하는 메모리가 있어야 한다.
+ - 200 byte까지 저장된다.
+
+ text
+  - 게시판의 내용 정도 문자열을 넣고 싶으면 text, longtext를 써야 한다.
+  
+
+
+
+
+
+
+
+
+
+
