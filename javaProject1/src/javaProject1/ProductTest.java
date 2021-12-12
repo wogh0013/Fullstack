@@ -22,12 +22,8 @@ public class ProductTest {
 //		
 		
 		
-		
-//		for(int i=0; i<list.size(); i++) {
-//			Product prd = list.get(i);
-//			System.out.println(prd.toString());
-//		}
-		
+	
+		// 1번째 방법
 //		Product prd = new Product(001, "노트북", 1200000, 2021, "삼성");
 //		Product prd2 = new Product(002, "모니터", 300000, 2021, "LG");
 //		Product prd3 = new Product(003, "마우스", 30000, 2020, "로지텍");
@@ -35,6 +31,12 @@ public class ProductTest {
 //		System.out.println(prd2.toString());
 //		System.out.println(prd3 .toString());
 		
+		
+		// 2번째 방법
+//		for(int i=0; i<list.size(); i++) {
+//			Product prd = list.get(i);
+//			System.out.println(prd.toString());
+//	}
 		
 	}
 }
