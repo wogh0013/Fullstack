@@ -5,13 +5,12 @@ import java.util.ArrayList;
 public class ProductTest {
 	public static void main(String[] args) {
 		
-
-		// 크기가 정해져 잇지 않은경우 
+		// 크기가 정해져 있지 않은 경우 
 		ArrayList<Product> list = new ArrayList<>();
 		
-		list.add(new Product(001, "노트북", 1200000, 2021, "삼성")); // 0번째
-		list.add(new Product(002, "모니터", 300000, 2021, "LG")); // 1
-		list.add(new Product(003, "마우스", 30000, 2020, "로지텍")); // 2
+		list.add(new Product(001, "노트북", 1200000, 2021, "삼성")); 	// 0번째
+		list.add(new Product(002, "모니터", 300000, 2021, "LG")); 	// 1번째
+		list.add(new Product(003, "마우스", 30000, 2020, "로지텍"));	// 2번째
 		
 		
 		System.out.println("상품번호   상품명     가격       연도      제조사");
@@ -20,6 +19,9 @@ public class ProductTest {
 		for(Product prd : list) {
 			System.out.println(prd.toString());			
 		}
+//		
+		
+		
 		
 //		for(int i=0; i<list.size(); i++) {
 //			Product prd = list.get(i);
