@@ -1,0 +1,117 @@
+use mydb;
+desc emp;
+
+-- DDL (Data Definition Language, 데이터 정의어)
+--  └ 전체 구조를 결정함. 테이블 생성(CREATE), 수정(ALTER), 삭제(DROP)
+-- DML (Data Manipulation Language, 데이터 조작어)
+--  └ 테이블 내의 데이터 조작. 데이터 조회(SELECT), 삽입(INSERT), 삭제(DELETE), 갱신(UPDATE)
+-- DCL (Data Control Language, 데이터 통제어)
+--  └ 권한 부여(GRANT), 권한 회수(REVOKE), 트랜잭션 커밋(COMMIT), 롤백(ROLLBACK)
+
+-- primary key 지정하는 쿼리 alter
+ALTER TABLE emp ADD CONSTRAINT PK_EMP PRIMARY KEY(empno);
+
+-- emp 테이블의 deptno / dept 테이블의 deptno -> 참조 관계
+DESC dept;
+SELECT * FROM dept;
+
+-- join 연산이나 서브쿼리의 연산을 통해 두 개의 테이블로부터 데이터를 만들어낸다.
+-- emp 테이블의 부서번호를 보고 dept 테이블로부터 부서명을 가져오려고 한다.
+-- join 연산이나 서브쿼리 연산이 foreign key가 없다고 실행이 안되는 것은 아니다.
+-- 데이터 입력 시 두 테이블에 강한 제약을 가해야 한다.
+/*
+	emp 테이블 입장에서는
+    1) dept 테이블에 존재하지 않는 부서번호가 입력되면 안됨.
+       부서번호 50번을 넣으면 에러가 발생하도록 해야 한다.
+       
+       dept 테이블 입장에서는 새로운 부서 번호를 넣는 것은 상관없는데
+						  기존에 emp 테이블에 있는 부서 번호를 없앤다면
+						  테이블 삭제 시 문제가 발생해야 함. (나를 참조하는 테이블이 있기 때문에)
+                          
+   	foreign key 를 줄 수 있는 조건
+	참조가 이루어지는 테이블의 필드가 primary key 이거나 unique 제약조건이어야 한다.
+    
+    ALTER TABLE 테이블명
+    ADD [CONSTRAINT 제약조건명]  // 대괄호는 생략 가능(시스템이 알아서 부여)
+    FOREIGN KEY(필드명)
+    REFERENCES 테이블명(필드명)
+*/
+
+ALTER TABLE emp ADD FOREIGN KEY(deptno) references dept(deptno);
+-- dept 테이블에 primary key 를 추가해주자
+
+-- primary key 를 부여할 때 오류가 발생하는 경우 -> 이미 기본키가 존재할 때
+--                                          테이블 내 데이터가 primary key 조건 만족해야 함 
+ALTER TABLE dept ADD PRIMARY KEY(deptno);
+
+-- 안전장치가 되어있다.
+DELETE FROM dept WHERE deptno=10;
+DROP TABLE dept; -- 테이블 삭제
+
+-- dept를 참조하고 있는 테이블부터 삭제하거나, 나를 참조하는 모든 foreign 키를 삭제하고나서 테이블 삭제를 해야 함.
+
+CREATE TABLE member(
+id INT, -- primary key
+user_id VARCHAR(40), -- 아이디 체인지가 가능함 unique
+password VARCHAR(40),
+username VARCHAR(40),
+phone VARCHAR(20),
+email VARCHAR(40),
+zipcode char(5),
+address1 VARCHAR(100),
+address2 VARCHAR(100),
+wdate DATETIME
+);
+
+DESC member;
+
+CREATE TABLE board(
+id INT PRIMARY KEY,
+user_id VARCHAR(40), -- member 테이블의 FOREIGN KEY
+title VARCHAR(1000),
+contents LONGTEXT,
+hit INT,
+wdate DATETIME
+);
+
+DESC board;
+
+-- board는 member 테이블을 참조 중이라서 user_id값이 member 테이블에 존재해야 한다.
+
+-- now() : 현재 날짜와 시간
+INSERT INTO board(user_id, title, contents, wdate)
+VALUES('test1', '제목1', '내용1', now());
+-- 에러 발생, FOREIGN KEY 위배
+
+INSERT INTO member(user_id, password, username, phone, email, wdate)
+VALUES('test1', '1234', '홍길동', '010-0000-0000', 'hong@hanmail.net', now());
+
+INSERT INTO board(user_id, title, contents, wdate)
+VALUES('test1', '제목1', '내용1', now());
+
+-- user_id 필드에 unique 제약조건 : error(값이 중복되면 안됨)
+INSERT INTO member(user_id, password, username, phone, email, wdate)
+VALUES('test1', '1234', '홍길동', '010-0000-0000', 'hong@hanmail.net', now());
+
+-- user_id 필드값을 바꿔주니 error 없이 정상 실행됨.
+INSERT INTO member(user_id, password, username, phone, email, wdate)
+VALUES('test2', '1234', '홍길동', '010-0000-0000', 'hong@hanmail.net', now());
+
+-- email 필드가 없을 때 : error(NOT NULL 제약조건)
+INSERT INTO member(user_id, password, username, phone, wdate)
+VALUES('test3', '1234', '홍길동', '010-0000-0000', now());
+
+INSERT INTO member(user_id, password, username, phone, email, wdate)
+VALUES('test4', '1234', '홍길동', '010-0000-0000', 'hong@hanmail.net', now());
+
+-- 본인 정보를 member 테이블에 작성하기
+INSERT INTO member(user_id, password, username, phone, email, wdate)
+VALUES('test5', '12345', '정호재', '010-4714-xxxx', 'woghxxxx@naver.com', now());
+
+INSERT INTO board(id, user_id, title, contents, wdate)
+VALUES('1', 'test1', '제목', '내용', now());
+
+
+
+
+
