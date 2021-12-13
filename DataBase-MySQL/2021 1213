@@ -37,19 +37,22 @@ SELECT * FROM dept;
     REFERENCES 테이블명(필드명)
 */
 
-ALTER TABLE emp ADD FOREIGN KEY(deptno) references dept(deptno);
+ALTER TABLE emp ADD FOREIGN KEY(deptno) REFERENCES dept(deptno);
 -- dept 테이블에 primary key 를 추가해주자
 
 -- primary key 를 부여할 때 오류가 발생하는 경우 -> 이미 기본키가 존재할 때
 --                                          테이블 내 데이터가 primary key 조건 만족해야 함 
 ALTER TABLE dept ADD PRIMARY KEY(deptno);
+DESC dept;
+SELECT * FROM dept;
 
 -- 안전장치가 되어있다.
 DELETE FROM dept WHERE deptno=10;
 DROP TABLE dept; -- 테이블 삭제
 
--- dept를 참조하고 있는 테이블부터 삭제하거나, 나를 참조하는 모든 foreign 키를 삭제하고나서 테이블 삭제를 해야 함.
+-- dept를 참조하고 있는 테이블부터 삭제하거나, 나를 참조하는 모든 foreign 키를 삭제하고 나서 테이블 삭제를 해야 함.
 
+-- 문제 발생시 DROP TABLE member; 로 테이블 삭제 후 다시 생성
 CREATE TABLE member(
 id INT, -- primary key
 user_id VARCHAR(40), -- 아이디 체인지가 가능함 unique
@@ -108,10 +111,177 @@ VALUES('test4', '1234', '홍길동', '010-0000-0000', 'hong@hanmail.net', now())
 INSERT INTO member(user_id, password, username, phone, email, wdate)
 VALUES('test5', '12345', '정호재', '010-4714-xxxx', 'woghxxxx@naver.com', now());
 
-INSERT INTO board(id, user_id, title, contents, wdate)
-VALUES('1', 'test1', '제목', '내용', now());
+-- board, member id 필드는 AI(Auto Increment)가 체크돼있어서 자동추가됨
+INSERT INTO board(user_id, title, contents, wdate)
+VALUES('test1', '제목', '내용', now());
+
+select * from board;
 
 
 
 
+-- 조인연산 : 두 개 이상의 테이블을 특정 조건에 맞춰서 결합하기
+-- inner join, outer join, self join
+-- emp 테이블의 ename   dept 테이블의 dname   조건 emp.deptno = dept.deptno
 
+SELECT ename, dname
+FROM emp
+INNER JOIN dept ON emp.deptno=dept.deptno;
+
+-- board 테이블의 id, title, username, contents, wdate
+
+-- board 테이블의 id, title, username, contents, wdate
+-- join 조건을 찾아보고, 양쪽에 동일한 이름의 필드가 있으면 어떤 필드를 사용할지 테이블명을 갖고 와야 한다.
+--   └ 테이블명.필드명 ( .으로 연결해줌 )
+SELECT board.id, title, username, contents, board.wdate
+FROM board
+INNER JOIN member ON member.user_id = board.user_id;
+
+SELECT a.id, title, username, contents, a.wdate
+FROM board a
+INNER JOIN member b ON a.user_id = b.user_id;
+
+USE classicmodels;
+-- customers 테이블의 salesRepEmployeeNumber, employees 테이블의 employeeNumber
+-- customers의 customername, employees의 firstname, lastname
+
+SELECT a.customername, b.firstname, b.lastname
+FROM customers a
+INNER JOIN employees b ON a.salesrepemployeenumber = b.employeenumber;
+
+-- 문제1. 고용인 중에 Pamela(firstname)란 사람이 고객이 누구인지, 물건을 팔았는지
+SELECT a.customername, a.phone, a.addressline1
+FROM customers a INNER JOIN employees b 
+ON a.salesrepemployeenumber = b.employeenumber
+WHERE b.firstname='Pamela';
+
+
+-- inner join 두 개의 테이블을 결합해서 만드는데 양쪽 다 필드값이 존재해야 한다.
+USE mydb;
+
+-- deptno가 없음
+INSERT INTO emp(empno, ename, sal) VALUES(8000, '홍길동', 5000);
+INSERT INTO emp(empno, ename, sal) VALUES(8001, '장길산', 6000);
+INSERT INTO emp(empno, ename, sal) VALUES(8002, '임꺽정', 7000);
+
+-- emp 테이블에서 이 부서들을 참조하고 있지 않다.
+INSERT INTO dept VALUES(50, '개발1부', '서울시');
+INSERT INTO dept VALUES(60, '개발2부', '부산시');
+
+SELECT * FROM emp;
+SELECT * FROM dept;
+
+SELECT ename, dname
+FROM emp INNER JOIN dept 
+ON emp.deptno = dept.deptno;
+
+-- outer join 연산 left하고 right
+-- from절에 가까운 것이 left -> left outer join : left쪽 테이블의 내용을 다 출력
+-- from절에서 조금이라도 먼 것이 right -> right outer join : right쪽 테이블의 내용을 다 출력
+
+SELECT ename, dname
+FROM emp a LEFT OUTER JOIN dept b 
+ON a.deptno = b.deptno; -- emp가 left라서 emp 테이블의 데이터 모두 출력
+
+-- 문제1. employees 테이블의 firstname, officecode / offices 테이블의  city, addressline1, phone
+-- 		 필드를 조인을 통해서 출력하기
+use classicmodels;
+
+SELECT a.firstname, a.officecode, b.city, b.addressline1, b.phone
+FROM employees a LEFT OUTER JOIN offices b
+ON  a.officecode = b.officecode;
+
+-- 문제2. 주문리스트 보이기 order 테이블과 order_detail 테이블은 orderNum으로 묶여있음
+-- 		 product 에 productcode로 묶여있음
+-- 	  	 주문테이블에서 선적일자, 구입자 이름, 구입주소, 제품명, 판매수량, 판매단가 출력하기
+
+SELECT shippeddate, customername, addressline1, D.productname,
+C.quantityordered, C.priceeach
+FROM orders A 
+LEFT OUTER JOIN customers B ON A.customernumbproductsordersorderdetailscustomerser = B.customernumber
+LEFT OUTER JOIN orderdetails C ON A.ordernumber = C.ordernumber
+LEFT OUTER JOIN products D ON C.productcode = D.productcode;
+
+-- 문제3. 제품라인이 Classic Cars, Vintage Cars 제품을 구입한 고객의 이름과 구입양
+--        └ 기준테이블
+-- 묶일 테이블 : products, orders, orderdetails
+
+SELECT customername, quantityordered
+FROM products A
+LEFT OUTER JOIN orderdetails B ON A.productcode = B.productcode
+LEFT OUTER JOIN orders C ON B.ordernumber = C.ordernumber
+LEFT OUTER JOIN customers D ON D.customernumber = C.customernumber
+WHERE A.productline in('Classic Cars', 'Vintage Cars');
+
+
+-- self join : 동일한 테이블로 join하기
+-- emp 테이블의 empno 필드는 사원번호이다. emp 테이블의 mgr 필드는 고용인들의 상사의 사원번호이다.
+-- 즉, 동일한 테이블을 join해야 상사의 이름을 확인할 수 있다. (self join)
+use mydb;
+select empno, ename, mgr from emp;
+
+SELECT A.ename, A.mgr, B.ename
+FROM emp A
+LEFT OUTER JOIN emp B ON A.mgr = B.empno;
+
+-- 주쿼리 / 서브쿼리
+-- 서브쿼리 : 쿼리 안에 또 다른 쿼리
+-- 실행순서 : 서브쿼리 -> 주쿼리
+-- 실행결과의 레코드 개수에 따라 단일행 쿼리 or 다중행 쿼리 생성
+-- 단일행 쿼리 : 실행결과값이 없거나 하나인 경우, select절(무조건 단일행 쿼리만 가능) 또는 where절에 주로 쓰인다. 
+-- 다중행 쿼리 : 실행결과값이 두 개 이상, 보통 from절에 많이 쓰이고 인라인뷰라고 한다.
+
+-- join 대체 서브쿼리 (일반적으로 join이 성능이 더 좋다)
+-- 이름, 부서번호, 부서명
+
+-- 단일행 서브쿼리 (첫 번째 방법)
+SELECT ename, deptno, (SELECT dname FROM dept WHERE emp.deptno = dept.deptno) as dname
+FROM emp;
+-- 단일행 서브쿼리 (두 번째 방법, alias 이용)
+SELECT ename, deptno, (SELECT dname FROM dept B WHERE A.deptno = B.deptno) as dname
+FROM emp A;
+
+-- 문제1. employees 테이블의 firstname, officecode / offices 테이블의 city, addressline1, phone
+-- 필드를 서브쿼리를 통해서 출력하기
+use classicmodels;
+
+SELECT A.firstname, A.officecode, 
+	(SELECT city FROM offices B WHERE A.officecode = B.officecode) city,
+    (SELECT addressline1 FROM offices B WHERE A.officecode = B.officecode) addressline1,
+    (SELECT phone FROM offices B WHERE A.officecode = B.officecode) phone
+FROM employees A;
+
+
+
+-- 서브쿼리가 from 절에, join으로 해결 못하는 경우
+-- group by 함수와 연결될 경우
+-- 통계, 데이터 개수의 합, 최댓값, 최솟값
+USE mydb;
+SELECT count(ename) FROM emp; -- ename 필드 중에 null값이 아닌 것만 카운트한다.
+SELECT count(comm) FROM emp;
+SELECT count(*) FROM emp; 	  -- count, sum, max, min, avg, 분산, 표준편차
+
+SELECT sum(sal), max(sal), min(sal), avg(sal) FROM emp;
+
+-- group by -> 그룹별로 묶어서 연산하기
+-- 부서별로 가장 많은 금액
+SELECT deptno, max(sal)
+FROM emp
+GROUP BY deptno;
+
+use mydb;
+-- 부서이름, 최댓값
+SELECT A.deptno, B.dname, max(sal) 
+FROM emp A
+INNER JOIN dept B ON A.deptno = B.deptno 
+GROUP BY deptno
+ORDER BY deptno;
+
+SELECT a.deptno, a.ename, b.maxsal
+FROM emp a
+LEFT OUTER JOIN (
+	SELECT deptno, max(sal) AS maxsal
+    FROM emp
+    GROUP BY deptno) b
+ON a.deptno = b.deptno
+ORDER BY deptno;
