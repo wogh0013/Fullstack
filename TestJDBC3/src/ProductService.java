@@ -37,4 +37,19 @@ public class ProductService {
 			System.out.printf("%s\t", dto.getPrice());
 		}
 	}
+	
+	void append()
+	{
+		ProductDto dto = new ProductDto();
+		System.out.print("코드 : ");
+		dto.setProduct_id(sc.next());
+		System.out.print("상품명 : ");
+		dto.setProduct_name(sc.next());
+		System.out.print("상품모델 : ");
+		dto.setProduct_model(sc.next());
+		System.out.print("제조사 : ");
+		dto.setMaker(sc.next());
+		System.out.print("가격 : ");
+		dto.setPrice(sc.next());
+	}
 }
