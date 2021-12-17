@@ -68,7 +68,7 @@ class Search
 		int mid=0;
 		boolean find = false;
 		
-		while(!find && left<right)
+		while(!find && left<=right)
 		{
 			mid=(left+right)/2;
 			
