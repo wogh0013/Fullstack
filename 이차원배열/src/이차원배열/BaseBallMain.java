@@ -1,4 +1,4 @@
-package 야구게임;
+package 이차원배열;
 
 import java.util.Random;
 import java.util.Scanner;

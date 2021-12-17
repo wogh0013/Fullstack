@@ -1,4 +1,4 @@
-package 날짜계산하기;
+package 이차원배열;
 import java.util.Scanner;
 //그해 경과 일수를 구함
 
