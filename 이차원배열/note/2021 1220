@@ -1,0 +1,85 @@
+링크드 리스트
+- 선형자료 구조
+- 필요할 때마다 동적으로 메모리를 할당하여 데이터를 저장 후,
+  다음 번 데이터를 가르키게 하는 방식. (연결 리스트)
+- 데이터가 데이터와 다음 번 요소의 주소 형태로 이루어져서,
+  필연적으로 클래스나 구조체를 사용해야 한다.
+  ( 데이터 | 다음 번 요소 주소 )
+- 형태로 저장되고, 그 구조를 Node라고 한다.
+- 배열 : 정의하고 메모리를 할당하면 할당된 메모리를 index로 접근하고,
+         배열의 참조 변수가 배열의 시작번지를 갖고 있어서 별도로 배열의 시작 정보를 따로 저장할 필요 x
+- 링크드 리스트 : 첫 번째 요소에 대한 정보를 저장할 head 변수와 
+                 리스트의 마지막 요소 를 알기 위한 tail 변수를 두어 목록 관리를 필연적으로 해야 한다. 
+
+
+class Node
+{
+    String data;
+    Node next; // 자기와 같은 타입에 대한 참조
+}
+
+Node head; // 리스트의 시작노드에 대한 정보를 저장해야 한다.
+Node tail; // 리스트의 마지막노드에 대한 정보를 저장해야 한다.
+
+// 원래 링크드 리스트 : 자동정렬해서 들어가는 구조
+
+head = new Node(); // 완충역할을 할 노드라 데이터가 안 들어감
+tail = new Node(); // 완충
+
+head -> ( | ) -> ( | ) -> tail
+
+             ( | )
+
+
+    스택                         힙
+------------------------------------------------             
+head 100                        100 data : head = new Node();
+
+------------------------------------------------
+head 100                        100 data : head = new Node();
+tail 200                        200 data : tail = new Node();
+
+-------------------------------------------------
+head 100                        100 data : 200  head.next = tail;
+tail 200                        200 data : 200  tail.next = tail;
+
+-------------------------------------------------   init 함수 호출한 상태
+
+    insertHead 함수
+
+    ------------------------
+    head 100                        100 data : 200  head.next = tail;
+    tail 200                        200 data : 200  tail.next = tail;
+
+    temp : 함수 안의 지역변수,       300  "A" : 200     temp = new Node();
+        함수를 호출할 때마다                            temp.data = data;    
+        생성 or 삭제
+    
+    연결
+    ------------------------
+        head 100                        100 data : 200  head.next = tail;
+        tail 200                        200 data : 200  tail.next = tail;
+
+        temp : 함수 안의 지역변수,       300  "A" : 200     temp.next = head.next;
+        함수를 호출할 때마다                                head.next = temp;    
+        생성 or 삭제
+
+--------------------------------------------------
+    head 100                        100 data : 800  head.next = tail;
+    tail 200                        200 data : 200  tail.next = tail;
+                                    300  "A" : 200
+                                    400  "B" : 300
+                                    500  "C" : 400
+                                    600  "D" : 500
+                                    700  "E" : 600
+                                    800  "F" : 700
+
+
+    display                                    출력
+    trace = head.next       800                 F 
+    trace = trace.next      700                 E
+    trace = trace.next      600                 D
+    trace = trace.next      500                 C
+    trace = trace.next      400                 B
+    trace = trace.next      300                 A
+    trace == tail
