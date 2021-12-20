@@ -6,6 +6,7 @@ public class ProductDto {
 	private String maker="";
 	private String price="";
 	
+
 	public String getProduct_id() {
 		return product_id;
 	}
