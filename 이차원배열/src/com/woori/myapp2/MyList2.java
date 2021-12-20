@@ -1,5 +1,7 @@
 package com.woori.myapp2;
 
+import java.util.Iterator;
+
 // 링크드 리스트 (Linked List)
 
 public class MyList2<T> {
@@ -173,6 +175,30 @@ public class MyList2<T> {
 		
 		if(flag)
 			trace2.next = trace1.next;
+	}
+	
+	//내부클래스를 이용해서 객체에 차례대로 접근할 수 있도록 Iterator 개체를 만들어서 줘야 한다.
+	class MyIterator<T> implements Iterator<T>{
+		@SuppressWarnings("unchecked")
+		Node2<T> trace = (Node2<T>) head.next;
+		public boolean hasNext()
+		{
+			if(trace == tail)
+				return false;
+			else
+				return true;
+		}
+		
+		public T next()
+		{
+			T obj = trace.data;
+			trace = trace.next;
+			return obj;
+		}
+	}
+	
+	public Iterator<T> iterator(){
+		return new MyIterator<T>();
 	}
 }
 
