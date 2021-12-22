@@ -1,0 +1,97 @@
+트리 : 부모/자식 관점이 있어야 한다.
+그래프에 대한 알고리즘이 최신 트렌드다.
+
+이진트리 : 차수가 2인 트리다. (가지의 개수가 0, 1, 2인 트리)
+
+이진탐색트리 배열을 이용한 이진 검색은 데이터 정렬을 따로 해야 돼서,
+데이터가 변환이 많은 경우에는 정렬에 시간을 소요하기 때문에 이진 검색이 효율적이지 못하다.
+
+이진탐색트리 : 데이터를 정렬하면서 집어넣는다.
+               노드의 키값을 기준으로 작은 값 -> 왼쪽, 큰 값 -> 오른쪽으로 저장한다.
+               
+               
+               
+               
+               
+               
+               
+               
+1.  정수변수 선언 
+2.  where is null  , is not null 
+3.  테이블의 필드명 변경 
+    alter table 테이블명 rename column 원래필드명 to 새로운필드명 
+4. JDBC
+    1)드라이버로딩 class.forname("클래스명");
+    2)Connection 객체연결
+    3)Statement나 PreparedStatement 객체를 만든다 
+      Statement 객체의 경우  sql= "insert board( id, title) values( '" + id + "', '"+title+"' )";
+      printf("%d ........)
+      PreparedStatement     sql= "insert board( id, title) values( ?, ? )";
+      나중에 파라미터라는 것을 만들어서 끼워넣기   
+      변수가 들어갈 위치를 물음표를 주고 나중에 값을 끼워넣기 한다 
+    4) 쿼리를 실행해서 결과를 ResultSet 으로 가져올 수 도 있고  (insert, update, delete)
+
+    DML : Data Manipulation Language  (insert, update, delete)
+    DDL : Data Definition Language( create, alter, drop, truncte)
+    DCL : Data Controll Language (grant, revoke)
+    
+    5) 모든 객체를 close하고 종료한다 
+
+    ublic class TestJDBC {
+   //mysql-connector-java-8.0.27.jar 이 파일안에 
+   //com.mysql.cj.jdbc.Driver 클래스가 존재한다 
+   
+   static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; 
+   //8.0 이상부터 allowPublicKeyRetrieval=true 필요함 
+   static final String DB_URL = "jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true";
+   // localhost - db아이피,  3306 포트번호  디비명 
+   static final String USERNAME = "user01";  //계정만들기 
+   static final String PASSWORD = "1234"; 
+   
+   public static void main(String[] args) {
+      try
+      {
+         Class.forName(JDBC_DRIVER); //동적으로 클래스를 메모리로 로딩한다 
+         System.out.println("드라이브 로딩 성공");
+      }
+      catch(ClassNotFoundException e)
+      {
+         e.printStackTrace();
+      }
+      
+      //java.sql. ***
+      Connection conn=null;
+      PreparedStatement ptmt=null;
+      ResultSet rs = null;
+      try
+      {
+         conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+         System.out.println("디비 연결 성공");
+         
+            String sql = "select * from board";
+         ptmt = conn.prepareStatement(sql);
+         rs = stmt.executeQuery(); //데이터를 디비로부터 가져온다.
+         while(rs.next()) //rs.next - 다음에 읽어올 다른데이터가 있으면 true, 데이터가 있는 동안 
+         {
+            //컬럼이 1부터 존재한다 
+            System.out.printf("%s %s %s\n", rs.getString(1), rs.getString(2), rs.getString(3));
+         }
+         rs.close()
+            ptmt.close();
+            conn.close();
+      }
+      catch(SQLException e)
+      {
+         e.printStackTrace();
+      }
+      catch(Exception e)
+      {
+         e.printStackTrace();
+      }
+   }   
+}
+
+
+
+
+         
