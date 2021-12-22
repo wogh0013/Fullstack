@@ -94,4 +94,156 @@
 
 
 
+
+- 모델링 : 현실세계를 데이터베이스로 옮기는 과정
+
+- 테이블 생성
+bookNo int AI PK - auto_increment, primary key, not null
+
+create table 테이블명
+(
+    필드명 int not null auto_increment primary key,
+    필드명 타입,
+    필드명 타입
+);
+
+create table board(
+   id int primary key not null auto_increment,
+   title varchar(10),
+   writer varchar(10),
+   contents varchar(10),
+   wdate date
+);
+
+
+-- ANSI(표준) 조인
+select board_id, username, title
+from board
+inner join member on board.userid=member.userid;
+
+
+select board_id, username, title
+from board
+join member on board.userid=member.userid;
+
+
+--mysql, oracle
+select board_id, username, title
+from board, member
+where board.userid=member.userid;
+
+
+
+<알고리즘>
+
+1. 순서도
+  1) 둥근 사각형(단말, terminal) - 프로그램의 시작 or 종료
+  2) 선 - 제어의 흐름, 제어가 흘러가는 방향
+  3) 마름모(판단) - 조건에 따라 어디로 분기할지
+  4) 순서도는 일을 처리하는 과정을 도표화시킴
+  
+2. 검색방법 
+  1) 선형검색 : 데이터를 처음부터 차례대로 읽어서 원하는 값이 나올 때까지 검색
+  2) 이분검색 : 데이터가 반드시 정렬돼있어야 함. 반씩 나누어서 찾기
+  3) 해쉬검색 : 해쉬테이블 구성, 이론상 한 번에 검색
+
+3. 큐
+  1) 선입선출(FIFO, Fisrt In First Out)
+  2) 버퍼, 큐 (은행창구에서 줄서서 기다리는 예제)
+  3) rear쪽에서 put / front쪽에서 pop이 이루어진다.
+    
+4.
+  int factorial(int limit)
+  {
+      if(limit==1)
+          return 1;
+      else
+          return limit * factorial(limit-1);
+  }
+  
+5. 이진검색트리 : 자기보다 작은 건 왼쪽 / 큰 건 오른쪽
+
+6. 연결리스트에서 삽입, 삭제
+
+7. 스택
+  1) 후입선출(LIFO, Last In First Out)
+  2) push, pop, top 인덱스를 통해서 작업한다.
+  
+8. 정렬
+     void insertionSort()
+   {
+      int i, j;
+      
+      //처음에 0은 이미 정렬된거   0번방에서 1번방데이터가 들어갈 위치 찾고 나머지 땡기기 작업 
+      for(i=1; i<nums.length; i++)
+      {
+         int temp=nums[i]; //위치 찾을 변수값을  temp에 저장함 
+         //i번째 위치부터 0에 도달할때까지 
+         j=i; 
+         while(j>0 && temp < nums[j-1] ) {
+            nums[j] = nums[j-1];//뒤로땡기고
+            j--;
+         }
+         
+         nums[j]=temp; //들어갈 위치에 삽입 
+         display();
+      }
+      
+   }
+
+    void bubbleSort1()
+   {
+      System.out.println("정렬중 .....................................");
+      for(int i=0; i<nums.length-1; i++)
+      {
+         for(int j=0; j< nums.length-1 -i; j++)
+         {
+            if( nums[j] > nums[j+1])
+            {
+               int temp = nums[j];
+               nums[j] = nums[j+1];
+               nums[j+1] = temp;
+            }
+         }
+         System.out.printf("%3d 회: ", (i+1));
+         display();
+      }
+      System.out.println("정렬완료 .....................................");
+   }
+
+    void selectSort1()
+   {
+      System.out.println("정렬중 .....................................");
+      for(int i=0; i<nums.length-1; i++)
+      {
+         for(int j=i+1; j<nums.length; j++)
+         {
+            if(nums[i]>nums[j])
+            {
+               int temp = nums[i];
+               nums[i] = nums[j];
+               nums[j] = temp;
+            }
+         }
+         System.out.printf("%3d 회: ", (i+1));
+         display();
+      }
+      System.out.println("정렬완료 .....................................");
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
          
