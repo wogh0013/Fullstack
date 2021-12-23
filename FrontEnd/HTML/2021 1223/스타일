@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>스타일 설정하기</h1>     
+    <!-- margin, padding 순서 : top right bottom left
+    margin은 앞 글자와의 간격, padding은 백그라운드 크기(?)-->
+    <h1 style="font-size:64pt; color:lightgray; margin: 10px 10px 10px 10px; background-color: lime; padding:20px 20px 20px 20px;">스타일 설정하기</h1>
+
+    <p style="font-size:14pt; color:maroon">
+    This paragraph
+    contains a lot of lines
+    in the source code,
+    but the browser
+    ignores it.
+    </p>
+    
+    <p>
+    This paragraph
+    contains         a lot of spaces
+    in the source         code,
+    but the        browser
+    ignores it.
+    </p>
+</body>
+</html>
