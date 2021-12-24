@@ -168,7 +168,7 @@ public class BinarySearchTree {
           pSubParent.left=pSub.right;
        else
           pSubParent.right=pSub.right;
-       
+        
        
    }
 }
