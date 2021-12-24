@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    /* class 같은 스타일을 묶어준다.
+        .(도트)로 시작해야 한다. */
+
+.city {
+  background-color: rgb(233, 185, 177);
+  color: white;
+  border: 2px solid black;
+  margin: 20px; /* 태그와 태그 사이의 간격 top right bottom left */
+  padding: 20px; /* 태그 경계와 내용 사이의 간격 */
+}
+
+#myHeader {
+    background-color: lightblue;
+    color: rgb(235, 118, 118);
+    padding: 40px;
+    text-align: center;
+
+}
+</style>
+</head>
+<body>
+
+<!-- css만 사용하려면 같은 페이지에 동일한 id가 있어도 상관없다.
+     그러나, 자바스크립트에서 h1 태그에 접근할 때 동일한 id가 있으면 첫 번째 거만 인식한다.
+     html과 css는 상관없는데 프로그래밍 언어인 자바스크립트나 Jquery에서 
+     id로 대상을 인식할 경우에 첫 번째 거만 인식하고 나머지는 무시한다. 
+     보통 하나의 html문서에서는 하나의 id만 갖도록 한다. -->    
+<h1 id="myHeader">아이디를 이용한 스타일 설정하기</h1>
+<h1 id="myHeader">아이디를 이용한 스타일 설정하기2</h1>
+<div class="city">
+<h2>London</h2>
+<p>London is the capital of England.</p>
+</div> 
+
+<div class="city">
+<h2>Paris</h2>
+<p>Paris is the capital of France.</p>
+</div>
+
+<div class="city">
+<h2>Tokyo</h2>
+<p>Tokyo is the capital of Japan.</p>
+</div>
+
+</body>
+</html>
+
