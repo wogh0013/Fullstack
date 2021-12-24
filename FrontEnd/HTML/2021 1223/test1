@@ -1,0 +1,22 @@
+<!DOCTYPE html>     <!--html5의 시작-->
+<html lang="ko">    <!--언어는 한국어-->
+<head>
+    <!-- meta : 문서의 기본이 되는 정보들 -->
+    <meta charset="UTF-8"> <!-- UTF-8 : 3byte 문자시스템 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- explorer edge에서 사용가능하도록 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 안드로이드에서 웹페이지를 볼 때, pc와 안드로이드가 해상도, 가로세로 비율이 다름.
+         안드로이드에서 볼 때도 비율이 깨지지 않고 알맞게 보이도록 -->
+    <title> Document </title> <!-- 문서의 제목 -->
+</head>
+<body> 
+    첫 번째 페이지 <br><br> <!-- <br> : 줄바꿈 -->
+    이 문서는 html 문서입니다. <br>
+    공백은            한 칸은 적용된다.
+    공백은&nbsp;&nbsp;&nbsp;이거로 표시한다. <br> <!-- &nbsp; : 공백-->
+    &lt;태그란&gt; html에서 지시하기 위한 문자이다. <br>
+    
+
+
+</body>
+</html>
