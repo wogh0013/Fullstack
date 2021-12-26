@@ -29,7 +29,7 @@ public class 퀵정렬 {
 		{
 			//left는 우측 상한을 만나거나, 기준값보다 큰 값을 만나거나
 			while(left<=end && nums[left] <= nums[key]) left++; //상한을 벗어날 수 있다.
-			while(right>start && nums[right] >= nums[key]) right--; //상한을 벗어날 수 있다.
+			while(right>start && nums[right] >= nums[key]) right--; //하한을 벗어날 수 있다.
 			
 			// 0 && A : 언제나 0, 뒤의 연산을 할 필요X
 			// 1 || A : 언제나 1, 뒤의 연산을 할 필요X
