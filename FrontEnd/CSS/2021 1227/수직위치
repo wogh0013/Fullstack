@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img.top{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 300px;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <h1>z-index</h1>
+    <img class="top" src="./images/tree1.jpg" width="300px">
+    <p>image 태그 위에 텍스트를 놓고자 한다.</p>
+</body>
+</html>
