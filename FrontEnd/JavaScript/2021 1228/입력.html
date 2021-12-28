@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+         ★ 중요 ★ + F12 누르는 것 ★
+
+         input 태그에 대해서 자바스크립트로 접근하려면 id속성이나 name속성을 이용해야 한다.
+         id로 접근할 때는 무조건 단수(첫 번째 하나)만 된다.
+                            └ 동일한 id 여러 개 있어도 무조건 첫 번째 하나만 접근가능
+         name은 접근 방법에 따라 단수 or 복수 둘 다 가능
+                            └ 동일한 이름 여러 개 있을 수 있다.
+                        
+         1. id로 접근할 때
+            document : html 문서를 가리킨다.
+            var obj = document.getElementById("id명");
+
+         2. name으로 접근할 때
+            1) form 태그 이용
+                var obj = document.form의name속성.이름;
+            2) form 태그 X          
+                var obj = document.getElementsName("이름속성")[0]; ...
+        -->
+    <input type="text" name="xvalue" id="xvalue">
+
+    <button type="button" onclick="displayValue()">값읽기</button>
+</body>
+</html>
+
+<script>
+    //window : 브라우저 객체
+    //onload라는 이벤트가 발생한다.
+    window.onload = function(){
+        var a = document.getElementById("xvalue");
+        //input 객체 자체를 말한다.
+        a.value = 1234; //객체의 value 속성에 값을 입력, name 태그류만 value 속성을 갖는다.
+    }
+
+    function displayValue(){
+        var obj = document.getElementsByName("xvalue");
+        alert(obj[0].value);
+    }
+</script>
