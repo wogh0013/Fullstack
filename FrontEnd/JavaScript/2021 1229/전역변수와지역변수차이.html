@@ -16,18 +16,21 @@
 
     function func1()
     {
+        var b=1; //지역변수 - 함수 내부에서만 존재한다.
+                 //           다른 곳에서 사용 X
         g_a++; 
     }
 
     function func2()
     {
+        let c=2;
         g_a++; 
     }
-
-    function func3()
 
     func1(); // 1
     func2(); // 2
     console.log(g_a); // 2
+    console.log(c);
+    console.log(b);
 
 </script>
