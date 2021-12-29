@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    let g_a=0; //전역변수 - 모든 함수가 공통으로 사용가능하다
+
+    function func1()
+    {
+        g_a++; 
+    }
+
+    function func2()
+    {
+        g_a++; 
+    }
+
+    function func3()
+
+    func1(); // 1
+    func2(); // 2
+    console.log(g_a); // 2
+
+</script>
