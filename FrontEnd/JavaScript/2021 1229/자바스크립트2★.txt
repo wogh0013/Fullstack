@@ -1,0 +1,26 @@
+input류 태그(input, select, textarea)
+    1. name 속성 : 서버로 값을 보내기 위해서 필요
+    2. value 속성 : 값
+
+    <input type="text" name="username" value="홍길동">
+    <input type="text" name="phone"    value="010-0000-1111">
+    <input type="text" name="address"  value="서울시 관악구">
+    <input type="text" name="email"    value="hong@naver.com">
+
+    키          값
+    username    임꺽정
+    phone       010-1111-9999
+    address     서울시 관악구
+    email       hong@naver.com
+
+input 이외의 태그들은 name 속성과 value 속성이 없다. 
+모든 태그에는
+    id         -> 하나의 html 문서에 하나만 존재해야 한다.
+    class      -> 배열로 접근한다.
+    innerHTML  -> 태그 안의 데이터를 읽고 쓰기
+
+객체에 접근할 함수
+    document.getElementById("id명")               -> 한 개만  innerHTML
+    document.getElementsByName("name속성")        -> value
+    document.getElementsByClassName("class속성")  innerHTML
+    document.getElementsByTagName("tag")          innerHTML
