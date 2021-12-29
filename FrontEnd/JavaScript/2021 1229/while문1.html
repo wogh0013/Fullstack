@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    한계 : <input type="text" id="limit"> <br>
+    <button type="button" onclick="goCalc()">합계구하기</button> <br>
+    <input type="text" id="result" readonly> 
+</body>
+</html>
+
+<script>
+    // i=1;
+    // while(i<=10)
+    // {
+    //     console.log(i);
+    //     i++;
+    // }
+
+    function goCalc()
+    {
+        var a = document.getElementById("limit").value;
+        var i=1;
+        var result=0;
+        while(i<=a)
+        {
+            result += i;
+            i++;
+        }
+        document.getElementById("result").value = result;
+    }
+</script>
