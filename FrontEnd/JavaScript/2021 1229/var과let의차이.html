@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    //호이스팅
+    name="홍길동"; //이 메모리 공간과
+
+    var name; //대부분은 다르다. 자바스크립트는 위의 name과 공유한다.
+
+    console.log(name); //홍길동
+
+    if(true)
+    {
+        var name="임꺽정"; //if문 안에서 만들었지만, 위의 name과 동일하게 받아들인다.
+        console.log(name);  //임꺽정
+    }
+
+    console.log(name); //임꺽정
+    var name;
+
+    //let name;   -> 호이스팅을 일으키지 않는다. 이미 있는 변수를 왜 또 만들어?
+    if(true)
+    {
+        let name="장길산"; //이 지역에서만 변수가 존재한다.
+        console.log(name); //장길산
+    }
+    console.log(name); //임꺽정
+
+</script>
