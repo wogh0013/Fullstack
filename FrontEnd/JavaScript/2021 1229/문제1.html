@@ -31,4 +31,18 @@
         console.log(obj[i].style.color);
         obj[i].style.color = colors[i];
     }
+
+
+    //문제2 -- p태그안의 text들을 colors에 있는 텍스트로 바꾸자 
+    obj[0].innerHTML=colors[0];
+    obj[1].innerHTML=colors[1];
+    obj[2].innerHTML=colors[2];
+    obj[3].innerHTML=colors[3];
+    obj[4].innerHTML=colors[4];
+
+    for(i=0; i<obj.length; i++)
+    {
+        obj[i].innerHTML = colors[i];  
+    }
+
 </script>
