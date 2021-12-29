@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="background">
+    <button type="button" onclick="goBG('0')">빨간색</button> <br>
+    <button type="button" onclick="goBG('1')">파란색</button> <br>
+    <button type="button" onclick="goBG('2')">노란색</button> <br>
+    <button type="button" onclick="goBG('3')">초록색</button> <br>
+    <button type="button" onclick="goBG('4')">회색</button> <br>
+    <button type="button" onclick="goBG('5')">흰색</button> <br>
+</body>
+</html>
+
+<script>
+
+    function goBG(id)
+    {
+        
+        // if(id=='0') 
+        //     document.getElementById("background").style.background="red";
+        // if(id=='1')
+        //     document.getElementById("background").style.background="blue";
+        // if(id=='2')
+        //     document.getElementById("background").style.background="yellow";
+        // if(id=='3')
+        //     document.getElementById("background").style.background="green";
+        // if(id=='4')
+        //     document.getElementById("background").style.background="gray";
+        // if(id=='5')
+        //     document.getElementById("background").style.background="white";
+        
+        let colors=["red", "blue", "yellow", "green", "gray", "white"];
+        document.getElementById("background").style.background = colors[id];
+    }
+</script>
