@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>화살표함수</h3>
+
+    <button class="button" type="button">one</button> <br>
+    <button class="button" type="button">two</button> <br>
+    <button class="button" type="button">three</button> <br>
+    <button class="button" type="button">four</button> <br>
+    <button class="button" type="button">five</button> <br>
+</body>
+</html>
+
+<script>
+    //자바스크립트가 배열에 유용한 함수들이 많다.
+    //forEach(출력), filter(데이터를 필터링), map(데이터 가공)
+
+    let array=[3,5,8,6,7,11,15,12,22];
+    array.forEach((n)=>{
+        console.log(n);
+    });
+
+
+    var buttons = document.querySelectorAll(".button"); //동일한 클래스의 배열을 가져온다.
+    buttons.forEach((a)=>{
+        console.log(a);
+        console.log(a.innerHTML);
+    });
+
+    var inputs = document.getElementsByClassName("nums");
+    for(i=0; i<inputs.length; i++)
+        console.log(inputs[i].value);
+
+    inputs.forEach((a)=>{
+        console.log(a.value);
+    });
+</script>
