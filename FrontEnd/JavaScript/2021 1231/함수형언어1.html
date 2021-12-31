@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>함수형 언어</h3>
+</body>
+</html>
+
+<script>
+    function add(x, y){
+        return x+y;
+    }
+
+    function sub(x, y){
+        return x-y;
+    }
+
+    function mul(x, y){
+        return x*y;
+    }
+    
+    function div(x, y){
+        return x/y;
+    }
+    
+    calc = add; //calc 변수에 add라는 함수의 주소를 저장한다.
+
+    var funcs = [add, sub, mul, div]; //함수를 배열로 저장. (자바와 다른 점)
+    for(i=0; i<funcs.length; i++)
+    {
+        console.log(funcs[i](7, 5));
+    }
+
+    //함수를 매개변수로 받는 함수 만들기 - callback 함수 : myfunc, 호출자 : callFunction
+    function callFunction(myfunc, x, y)
+    {
+        console.log(myfunc(x, y));
+    }
+
+    callFunction(add, 7, 8);
+    callFunction(sub, 7, 8);
+    callFunction(mul, 7, 8);
+    callFunction(div, 7, 8);
+
+</script>
