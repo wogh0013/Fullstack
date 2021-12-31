@@ -29,4 +29,40 @@
     times = arr.filter(a=>a%3==0);
     console.log(times);
 
+    //문제2. 성이 김씨인 사람의 데이터 출력
+    let students =[
+        {name:"홍길동", kor:100, eng:100, mat:90},
+        {name:"임꺽정", kor:95, eng:90, mat:85},
+        {name:"김민지", kor:70, eng:60, mat:90},
+        {name:"김형근", kor:75, eng:55, mat:100},
+        {name:"이익현", kor:80, eng:90, mat:100},
+        {name:"강형욱", kor:65, eng:85, mat:70}
+    ];
+
+    let result = students.filter((sentence)=>{
+        return sentence.name[0]=="김";
+        // console.log(sentence);
+        // console.log(sentence.name[0]=="김");
+    });
+    console.log(result);
+
+    //문제3. 총점과 평균을 구해서, 평균이 85 이상인 사람만 구하기
+    students.forEach(obj=>{
+        obj["total"] = obj.kor + obj.eng + obj.mat;
+        obj["avg"] = obj.total/3.0;
+        console.log(obj.avg);
+    });
+
+    //내가 풀이한 방법
+    // let avg85 = students.filter((obj)=>{return obj.avg >= 85});
+    // console.log(avg85);
+
+    //강사님이 풀이한 방법
+    result = students.filter((e)=>{
+        return e.avg>=0;
+    });
+    console.log(result);
+
+    
+
 </script>
