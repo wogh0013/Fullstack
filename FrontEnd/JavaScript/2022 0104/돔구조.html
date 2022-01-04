@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>DOM 구조</h3>
+    <h4>홍길동</h4>
+</body>
+</html>
+
+<script>
+    window.document.write("윈도우 객체 안에 Document 객체가 있다.<br/>");
+    document.write("내부높이 : " + window.innerHeight + "<br/>");
+    for(i=1; i<=10; i++)
+    {
+        document.write("<h4>홍길동<h4/>");
+    }
+
+    console.log('eee'); //대괄호[] 앞에는 자동;이 안 만들어진다. -> 직접 써야 함.
+    [1,2,3].forEach(element=>{
+        console.log(element);
+    });
+
+    document.body.style.backgroundColor="red";
+    setTimeout(()=>{
+        document.body.style.backgroundColor="";
+    }, 1000);
+
+    document.write(navigator.userAgent+"<br/>"); //브라우저 정보
+    document.write(navigator.platform+"<br/>");  //os 정보
+</script>
