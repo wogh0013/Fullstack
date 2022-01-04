@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>프라미스</h3>
+</body>
+</html>
+
+<script>
+    //setTimeout은 함수를 받아서 지정된 시간 뒤에 호출해준다.
+    //setTimeout(함수, 시간) 시간은 밀리초를 단위로 한다. 1000이 1초이다.
+    //아래 함수는 2초 후에 전달된 화살표 함수를 호출한다.
+    //화살표 함수 안에서 resolve("done")를 호출하면 then 구문이 실행된다.
+    let promis = new Promise(function(resolve, reject){
+        setTimeout(()=>{
+            resolve("done")
+        }, 2000);
+    })
+    .then(()=>{
+        console.log("success");
+        return result;
+    })
+    .then(()=>{
+        console.log("success 2");
+        return result;
+    })
+    .then(()=>{
+        console.log("success 3");
+        return result;
+    })
+    .catch((error)=>{
+        console.log(error)
+    }).finally(()=>{
+        console.log("ending..........");
+    });
+
+    console.log("프라미스를 사용해보자");
+</script>
