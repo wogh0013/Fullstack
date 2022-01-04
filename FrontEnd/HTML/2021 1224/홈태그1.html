@@ -1,0 +1,118 @@
+<!-- 매우 중요 !!!! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        input : 데이터를 입력받아서 서버로 보내기 위해 사용
+            - 속성 : type(text, password, checkbox, radio...), 어떤 형태로 데이터를 입력받을지 설정
+            - name : 다른 태그에 없고 input, select, textarea에만 name 속성이 있다.
+                     키값으로 서버에 전달된다. (name이 중요 !! 서버 전달 !)
+            - value : 사용자가 입력한 값을 저장하는 속성
+            - id : 모든 태그가 다 가질 수 있다. 서버로 보내는 일은 관계 X
+                   자바스크립트에서 프로그래밍한다.
+    ***
+    모든 INPUT 태그류는 FORM 태그 사이에 있어야 서버로 정보가 전송된다.
+
+    ?username=333&password=555  -> 이 값을 처리하는 언어는 자바이다.
+
+    form 태그의 속성이
+        action 현재 페이지에서 보낸 정보를 받아서 처리할 페이지
+        method 정보를 전송하는 방식
+                get - 기본값이면 get방식으로 전송, 1000byte 이내의 정보만 보냄
+                      모든 정보가 url에 공개된다. (한글은 깨진다)
+                       header
+
+                post - 길이 제한이 없다. 정보가 따로 가서 url에 드러나지 않음(보안)
+                       회원가입, 게시물 작성, 로그온, 파일전송 등...
+                       서버로 정보를 전송할 때 header정보, body정보로 나누어서 전송함
+                        header : 사전정보
+                        body : 실제 보내야 할 정보가 따라감
+            
+            가급적 하나의 웹페이지 안에는 하나의 form 태그만 갖도록 한다.
+            (form 태그를 여러 개 두고 쓰는 경우도 있긴 함)
+
+            ex) <form>            │           <form>
+                    <form>        │           </form>
+                                  │  
+                    </form>       │           <form>
+                </form>           │           </form>
+                  │                             └ 이건 ok                
+                  └ 이렇게 쓰면 절대 X (서버로 정보를 전송하지 못함)    
+    -->
+
+<form method="get">
+    <label for="username">사용자이름</label> <br>
+    <input type="text" name="username" id="username"> <br>
+    <label for="password">패스워드</label> <br>
+    <input type="password" name="password" id="password"> <br>
+    <input type="submit" value="보내기"> <!-- submit 버튼을 통해 서버로 정보를 전송한다 -->
+
+    <br><br>
+    <h1>라디오 : 그룹으로 묶어서 그룹 중에 하나를 선택</h1>
+    <p>동일 그룹일 때 필연적으로 name 속성이 같아야 한다.</p>
+
+    <!-- name 속성이 같으면 그 그룹 안에서 한 개만 선택됨.
+         name 속성이 다르면 다른 그룹으로 인식해서 선택한 것이 초기화가 안됨.-->
+    <label for="C">C언어</label>
+    <input type="radio" name="language" id="C" value="1"> <br>
+    <label for="java">java언어</label>
+    <input type="radio" name="language" id="java" value="2"> <br>
+    <label for="python">파이썬</label>
+    <input type="radio" name="language" id="python" value="3"> <br>
+    <label for="fortran">fortran</label>
+    <input type="radio" name="language" id="fortran" value="4"> <br>
+    <br>
+    <label for="apple">사과</label> 
+    <input type="radio" name="apple" id="apple"> <br>
+    <label for="orange">오렌지</label>
+    <input type="radio" name="orange" id="orange"> <br>
+    <label for="grape">포도</label>
+    <input type="radio" name="grape" id="grape"> <br>    
+
+    <h1>좋아하는 과일 선택</h1>
+    <label for="apple2">사과</label> 
+    <input type="checkbox" name="apple2" id="apple" value="apple"> <br>
+    <label for="orange2">오렌지</label>
+    <input type="checkbox" name="orange2" id="orange2" value="orange"> <br>
+    <label for="grape2">포도</label>
+    <input type="checkbox" name="grape2" id="grape2" value="grape"> <br> 
+
+    <h1>셀렉트박스</h1>
+        <select name="menu" id="menu">
+            <option value="1">김치찌개</option>
+            <option value="2">된장찌개</option>
+            <option value="3">청국장</option>
+            <option value="4">두부찌개</option>
+            <option value="5">두루치기</option>
+        </select>
+
+    <h1>textarea</h1>
+    <textarea name="contents" id="contents" cols="80" rows="10"></textarea> <br>
+
+    <!--
+        input   type="submit"   무조건 서버로 전송한다.
+                                에러체크는 자바스크립트가 한다. (html이 하는 게 X)
+                                submit 버튼을 누르면 바로 서버로 가서, 중간에 에러체크를 할 수 X
+                type="button"   자바스크립트로 에러체크 후 서버로 전송한다.
+                type="reset"    화면에 있는 모든 입력창을 clear 할 때 사용한다.
+
+                둘이 같은 태그이다.
+                <button>보내기</button>                 =   <input type="button" value="보내기">
+                <button type="button">보내기</button>   =   <input type="button" value="보내기">   
+    -->
+
+    <input type="submit" value="보내기1"> <br> <!-- submit 버튼을 통해 서버로 정보를 전송함 -->
+    <input type="button" value="보내기2"> <br>
+    <button>보내기3</button> <br>
+    <button type="button">보내기4</button> <br>
+
+</form>
+
+</body>
+</html>

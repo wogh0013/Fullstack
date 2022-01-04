@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    let person={"name":"홍길동", "age":23, "phone":"010-2222-2222",
+            "display":function(){
+                console.log(this.name);     //자바스크립트는 this 생략 불가
+                console.log(this.age);      //함수를 변수처럼 저장 가능
+                console.log(this.phone);    //display 키값을 이용해 함수 호출 가능
+            },
+            "setValue":function(name="", age=20, phone="010-0000-0000"){
+                this.name=name;
+                this.age=age;
+                this.phone=phone;
+            }};
+
+            person.display();
+
+            person.setValue("임꺽정", 33, "010-1111-1111");
+            person.display();
+
+            person.name="장길산";
+            person.age=33;
+            person.phone="010-3333-3333";
+            person.display();
+
+            //JSON 객체에서는 화살표 함수 적용X
+            let counter={"count":10,
+                "decrease":()=>{
+                    this.count=this.count-1;
+                },
+                "increase":()=>{
+                    console.log(this.count);
+                    this.count=this.count+1;
+                    console.log(this.count);
+                }
+            };
+
+            counter.increase();
+            counter.increase();
+            counter.increase();
+            console.log(counter.count);
+            counter.decrease();    
+            console.log(counter.count);
+</script>

@@ -1,0 +1,28 @@
+추상클래스 - 추상메서드를 하나 이상 갖고 있는 클래스이다.
+            (추상메서드 : 함수의 구현 부분이 없는 메서드)
+           - abstract : 추상메서드 정의
+           - 객체 생성을 못한다.
+           - 추상클래스를 상속받은 클래스도 추상클래스이다.
+             (추상클래스의 자식클래스 -> 추상클래스)
+           - 상속받은 클래스가 추상메서드를 재정의(overriding)해줘야 추상클래스가 아니게 된다.
+
+           - 추상클래스를 사용하는 이유 : 상속받은 쪽에서 이 메서드를 반드시 오버라이딩하기를 바랄 때 
+
+ArrayList 클래스 안에 indexOf 함수, 데이터를 찾아준다.
+          사용자가 만든 클래스 입장에서 indexOf를 써서 데이터를 검색하려면
+          equals(객체를 비교할 때 사용)를 오버라이딩해야 한다.
+
+          Object클래스에서 equals를 추상메서드로 만든다면,
+          모든 클래스마다 equals를 오버라이딩해야 한다.
+
+
+
+extends는 일반 클래스와 abstract 클래스 상속에 사용되고, implement는 interface 상속에 사용된다.
+class가 class를 상속받을 땐 extends를 사용하고, interface가 interface를 상속 받을 땐 extends를 사용한다.
+class가 interface를 사용할 땐 implements를 써야하고
+interface가 class를 사용할 땐 implements를 쓸수 없다.
+extends는 클래스 한 개만 상속 받을 수 있다.
+extends 자신 클래스는 부모 클래스의 기능을 사용한다.
+implements는 여러개 사용 가능하다.
+implements는 설계 목적으로 구현 가능하다.
+implements한 클래스는 implements의 내용을 다 사용해야 한다.  

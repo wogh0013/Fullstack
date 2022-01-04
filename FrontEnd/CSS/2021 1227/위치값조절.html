@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.static{
+            position: static; /*기본값이 static이라 안 써줘도 된다.*/
+            border: 3px solid #73ad21;
+        }
+        div.relative{
+            position: relative; /*원래의 위치(static)로부터 지정값만큼 옮길 수 있다.*/
+            border: 3px solid #73ad21;
+            top: -10px;
+            left: 40px;
+        }
+
+        /* fixed : 위치를 고정시킨다. */
+        div.fixed{
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            border: 3px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <h3>div 태그 위치 지정하기</h3>
+    <div class="static">static위치 지정하기</div>
+    <div class="relative">상대위치 지정하기</div>
+    <div class="relative">상대위치 지정하기2</div>
+    <div class="relative">상대위치 지정하기3</div>
+    <div class="fixed">위치를 고정시켜보자</div>
+
+</body>
+</html>

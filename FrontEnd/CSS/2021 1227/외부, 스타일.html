@@ -1,0 +1,58 @@
+Margin
+------
+Border
+ㅡㅡㅡ
+Padding
+------
+Content
+~~~~~~
+
+
+
+
+
+외부.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>스타일</h1>
+    <p>외부 스타일 사용하기</p>
+    <p>외부파일을 link 태그를 이용해 사용해보자</p>
+</body>
+</html>
+
+
+
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+style.css
+
+body{
+    background-image: url("./images/background1.jpg");
+    /* background-color: bisque; */
+    font-size: 11pt;
+}
+
+/* rgb(red, green, blue)
+   rgba(red, green, blue, alpha)
+     └ alpha가 0에 수렴할수록 투명해짐
+               1에 수렴할수록 불투명해짐 
+    따로 opacity(0~1)를 줘서 투명도를 설정할 수도 있다.           
+*/
+
+h1{    
+    color: rgba(169, 169, 169, 0.878);
+}
+
+p{
+    color: darkgray;
+}

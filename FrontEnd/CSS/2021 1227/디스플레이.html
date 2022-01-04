@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 50%;
+            height: 200px;
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 모든 태그는 id 속성과 class 속성을 가지고 있다.
+         div 태그 말고도 table 태그도 이 방법으로 접근이 가능하다.
+         display 속성은 block(보임), none(안 보임) -->
+    <div id="id1">첫 번째 div</div>
+    <div id="id2" style="display:none;">두 번째 div</div>
+    <div id="id3" style="display:none;">세 번째 div</div>
+    <div id="id4" style="display:none;" >네 번째 div</div>
+    <div id="id5" style="display:none;">다섯 번째 div</div>
+
+    <!-- onclick : 이벤트(하드웨어적 움직임)
+         버튼을 누르면 onclick -> 호출될 함수(리스너) -->
+    <button type="button" onclick="goView('1')">1번</button>
+    <button type="button" onclick="goView('2')">2번</button>
+    <button type="button" onclick="goView('3')">3번</button>
+    <button type="button" onclick="goView('4')">4번</button>
+    <button type="button" onclick="goView('5')">5번</button>
+
+</body>
+</html>
+
+<script>
+    //자바스크립트는 변수의 타입을 지정하지 않아도 되고, 선언도 안 해도 된다.
+    //var a;
+    //let b;
+    function goView(id) //매개변수에 타입을 쓰면 안된다.
+    {
+        //전부 안 보이도록 바꾸기
+        var i;
+        for(i=1; i<=5; i++)
+            document.getElementById("id"+i).style.display="none";
+
+        //선택된 항목만 출력되도록
+        document.getElementById("id"+id).style.display="block";
+    }
+</script>

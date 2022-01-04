@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    let flowers=["작약", "백일홍", "천일홍", "목련", "목단", "구절초", "국화"];
+    var i;
+
+    for(i=0; i<flowers.length; i++)
+    {
+        console.log(flowers[i]);
+    }
+
+    //최신 방법
+    for(i in flowers)
+        console.log(i, flowers[i]);
+
+    for(i of flowers)
+        console.log(i, flowers[i]);
+
+    for(item of flowers)
+        console.log(item);
+
+    
+    //JSON - JavaScript Object Notation
+    //본래의 자바스크립트는 클래스보다 객체를 저장하는 방법인 JSoN방식을 채택(현재 표준)
+    //react, vue나 데이터를 주고 받을 때 JSON
+    //자바의 HashMap과 유사하다. -> {키:값} 으로 저장
+    var data = {"name":"홍길동", "age":27};
+    console.log(data["name"], data["age"]);
+    console.log(data.name, data.age);
+
+    var movie = [
+            {"title":"내일을 향해 쏴라", "actor":"폴뉴먼, 로베트레드포드"},
+            {"title":"스팅", "actor":"폴뉴먼, 로베트레드포드"},
+            {"title":"마이페어레이디", "actor":"오드리햅번"},
+            {"title":"로마의휴일", "actor":"오드리햅번, 그레고리팩"},
+            {"title":"위대한개츠비", "actor":"로버트레드포드"},
+            {"title":"앵무새죽이기", "actor":"그레고리팩"},
+            {"title":"다이하드", "actor":"브루스윌리스"}
+    ];
+
+    for(i=0; i<movie.length; i++)
+        console.log(movie[i]["title"], movie[i].actor); // 접근법은 []든 .이든 가능
+
+    for(i in movie)
+        console.log(movie[i]["title"], movie[i]["actor"]);
+
+    for(item of movie)
+        console.log(item.title, item.actor);
+
+</script>

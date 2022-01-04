@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    이름 : <input type="text" name="username" id="username"> <br>
+    나이 : <input type="text" name="userage" id="userage"> <br>
+    전화번호 : <input type="text" name="phone" id="phone"> <br>
+    이메일 : <input type="text" name="email" id="email"> <br>
+
+    <button type="button" onclick="goDisplay1()">출력하기1</button>
+    <button type="button" onclick="goDisplay2()">출력하기2</button>
+</body>
+</html>
+
+<script>
+    function goDisplay1()
+    {
+        //id를 이용해서 입력값 읽어서 콘솔에 출력(console.log)
+        var name = document.getElementById("username").value;
+        var age = document.getElementById("userage").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+
+        console.log(`${name} ${age} ${phone} ${email}`);
+    }
+
+    function goDisplay2()
+    {
+        //name을 이용해서 입력값 읽어서 콘솔에 출력
+        var name = document.getElementsByName("username")[0].value;
+        var age = document.getElementsByName("userage")[0].value;
+        var phone = document.getElementsByName("phone")[0].value;
+        var email = document.getElementsByName("email")[0].value;
+
+        console.log(`${name} ${age} ${phone} ${email}`);
+    }
+
+</script>

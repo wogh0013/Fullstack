@@ -1,0 +1,434 @@
+-- 서브쿼리 : 주쿼리 안에서 진행되는 쿼리 / select, from, where 각각 절마다 쿼리를 사용할 수 있다.
+-- select 절에 사용되는 서브쿼리는 join과 비슷한 기능을 가진다. (join을 더 많이 사용함)
+
+-- 부서번호를 다른 테이블로부터 불러오기
+use mydb;
+
+SELECT ename, deptno, 
+	(SELECT dname FROM dept B WHERE B.deptno = A.deptno) dname
+FROM emp A;
+
+-- 서브쿼리는 반드시 괄호로 감싸줘야 한다.
+-- from 절에 서브쿼리를 작성하자
+-- 서브쿼리가 실행돼서 집합이 오는데, 이때 집합의 필드나 데이터가 많아도 된다.
+
+
+SELECT deptno, max(sal)
+FROM emp
+GROUP BY deptno;
+
+SELECT ename, sal, maxsal
+FROM (
+	SELECT deptno, max(sal) maxsal    -- inline view(내장뷰)
+    FROM emp
+    GROUP BY deptno
+    ) A
+RIGHT OUTER JOIN emp B ON A.deptno = B.deptno;
+
+-- 테이블 복사 명령어 없음. 다만 서브쿼리를 사용해서 테이블 구조만 복사하거나,
+-- 전체 또는 일부를 복사할 수 있다. (단 제약조건은 복사되지 않는다)
+-- 서브쿼리를 사용해서 테이블 복제
+-- create table [테이블명] as select [서브쿼리]
+CREATE TABLE emp2 AS SELECT * FROM emp;
+SELECT * FROM emp2;
+
+CREATE TABLE emp3 AS SELECT ename, sal, hiredate FROM emp WHERE deptno IN (10,20);
+SELECT * FROM emp3;
+
+-- 데이터 빼고 구조만 복사된다.
+CREATE TABLE emp4 AS SELECT * FROM emp WHERE 1=0; -- 1=0을 만족하는 데이터가 없으므로, 데이터는 전송x
+SELECT * FROM emp4;
+
+DESC emp2;
+
+-- UPDATE 는 데이터를 수정할 때 사용하는 명령어 (DML)
+-- UPDATE 테이블명 SET 필드명1='값1', 필드명2='값2', ..... WHERE 조건절
+-- WHERE 조건절 구문은 SELECT와 동일하다.
+use mydb;
+SELECT * FROM emp2;
+UPDATE emp2 SET gender = 'F'; -- 전부 바꿔치기
+SELECT * FROM emp2;
+
+UPDATE emp2 
+SET job = 'SALESMAN', sal=9000 WHERE empno=7566;
+SELECT * FROM emp2;
+
+-- 사원번호가 7654, 7499, 7788, 7839번의 부서번호를 50으로 고치고, 성별을 M으로 고치시오.
+UPDATE emp2
+SET deptno=50, gender='M'
+WHERE empno in (7654,7499,7788,7839);
+SELECT * FROM emp2;
+
+-- MGR이 7839에 해당하는 사원의 COMM을 2000 지불하기
+UPDATE emp2
+SET COMM=2000
+WHERE MGR=7839;
+SELECT * FROM emp2;
+
+-- JOB이 SALESMAN인 사람의 COMM을 1000 지불하기
+UPDATE emp2
+SET COMM=1000
+WHERE JOB='SALESMAN';
+SELECT * FROM emp2;
+
+-- DELETE 삭제 명령어 -> DML 데이터 삭제 명령
+-- DELETE FROM 테이블명 WHERE 조건절
+DELETE FROM emp2 WHERE empno IN (7369,7499);
+DELETE FROM emp2;
+SELECT * FROM emp2;
+
+-- CROSS JOIN : 막무가내로 테이블을 결합, 샘플데이터로 만드고자 할 때
+SELECT A.*, B.*			-- emp 테이블의 데이터 개수 (M * N) dept 테이블의 데이터 개수
+FROM emp A
+CROSS JOIN DEPT B;
+
+-- union : 테이블들의 데이터를 하나로 묶고자 할 때 사용된다.
+--		   필드 개수와 필드 타입만 맞으면 가능하다.
+--		   emp 테이블과 dept 테이블의 데이터를 합해서 한 번에 가져올 수 있다.
+--	UNION ALL : 중복이 있더라도 중복을 제거하고 가져온다.
+
+SELECT empno, ename
+FROM emp
+UNION ALL
+SELECT deptno, dname
+FROM dept;
+
+-- 게시판에 테이블이 50개쯤 된다. 여기서 전체를 검색해오기
+SELECT id, title, contents FROM board1 WHERE title LIKE '%코로나%'
+UNION ALL
+SELECT id, title, contents FROM board2 WHERE title LIKE '%코로나%'
+UNION ALL
+SELECT id, title, contents FROM board3 WHERE title LIKE '%코로나%';
+
+-- 테이블의 최댓값
+SELECT max(sal), min(sal), avg(sal), count(*) FROM emp;
+
+
+
+USE classicmodels;
+
+SELECT count(customernumber), country
+FROM customers
+GROUP BY country
+ORDER BY country;
+
+-- 인원수별로 내림차순
+SELECT count(customernumber), country
+FROM customers
+GROUP BY country
+ORDER BY count(customernumber) desc;
+
+-- SELECT 구문에서 WHERE 절에는 그룹함수를 쓸 수 없다.
+-- 고객숫자가 10명 넘는 나라만 보려고 하낟.
+-- WHERE 절은 사용 못하고 HAVING 절이 사용가능하다.
+SELECT count(customernumber), country
+FROM customers
+GROUP BY country
+HAVING count(customernumber)>=10;
+
+SELECT * FROM 
+(
+	SELECT count(customernumber) cnt, country
+    FROM customers
+    GROUP BY country
+) A
+WHERE A.cnt>=10;
+
+
+-- 문제 : products테이블에서 product line별로 제품 개수가 5개 이상인 라인과 제품 개수만 출력하기
+-- 		 제품 개수에 맞춰서 내림차순으로 출력하기
+SELECT productline, count(productname)
+FROM products
+GROUP BY productline
+HAVING count(productname) >= 5
+ORDER BY count(productname) desc;
+
+
+-- EXIST : 서브쿼리에 데이터가 존재할 경우 true값, 존재 안 할 경우 false값
+--			서브쿼리 실행결과가 존재유무만 판단한다. 
+--			WHERE 조건절 줄 때
+
+SELECT *
+FROM customers
+WHERE EXISTS (
+	SELECT productcode FROM products WHERE productline='Ships' and 1=0
+);
+
+-- in : = or = or = or .... (많이 쓴다)
+-- any : > or > or > or ......
+-- all : > and > and > and ......
+-- 실행결과가 레코드셋이 많았음. 다중행 서브쿼리
+SELECT productcode
+FROM orderdetails
+WHERE quantityordered >= 60;
+
+SELECT productname
+FROM products
+WHERE productcode =
+		ANY(SELECT productcode
+			FROM orderdetails
+            WHERE quantityordered = 10);
+            
+-- 서브쿼리로 데이터를 만들 수 있다.
+-- INSERT 키워드로 서브쿼리로 이용해서 데이터를 INSERT할 수 있다.
+CREATE TABLE customers2 AS SELECT * FROM customers WHERE 1=0;
+
+DESC customers2;
+
+-- 고객번호를 200번 이하만 customers2 로 옮기기
+INSERT INTO customers2 SELECT * FROM customers WHERE customernumber<=200;
+SELECT * FROM customers2;
+
+-- customers3 테이블을 만들고, country가 null인것만 복사
+CREATE TABLE customers3 AS SELECT * FROM customers WHERE 1=0;
+INSERT INTO customers3 SELECT * FROM customers WHERE country IS NULL;
+SELECT * FROM customers3;
+
+-- 디비도 switch ~ case문처럼 상황에 따라서 조건을 주어야 할 때가 있다.
+-- orderdetails 테이블의 quantityordered 필드의 값에 따라서 등급을 나눈다.
+/*
+ case when 조건식  then 처리할 수식
+	  when 조건식2 then 처리할 수식
+      else 나머지
+end as alias
+*/
+
+SELECT ordernumber, quantityordered,
+	CASE WHEN quantityordered > 30 THEN 'The quantity is greater than 30'
+		 WHEN quantityordered = 30 THEN 'The quantity is 30'
+         ELSE 'The quantity is under 30'
+	END AS orderText
+FROM orderdetails;
+    
+ 
+ 
+ 
+ USE mydb;
+ 
+ -- emp 테이블의 부서번호가 10-영업부, 20-홍보부, 30-마케팅, 40-개발1부, 그밖의 부서 배정 중
+SELECT ename, deptno,
+	CASE WHEN deptno=10 THEN '영업부'
+		 WHEN deptno=20 THEN '홍보부'
+         WHEN deptno=30 THEN '마케팅'
+         WHEN deptno=40 THEN '개발1부'
+         ELSE '부서배정중'
+	END AS dname
+FROM emp
+ORDER BY deptno;
+
+
+
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+-- 한글 안 깨지게 하려면 mysql 설정
+
+CREATE DATABASE test; -- 자바나 nodejs에서 가져올 때 한글이 깨질 수 있다.
+DROP DATABASE test;
+SHOW DATABASES; 	  -- 현재 데이터베이스 목록 보기
+
+CREATE DATABASE test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+/*
+	시작 - cmd -
+    mysql -u root -p --port=3306
+ */
+ USE test;
+ CREATE TABLE Persons
+ (
+	PersonID   int,
+    LastName   varchar(255),
+    FirstName  varchar(255),
+    address    varchar(255),
+    city 	   varchar(255)
+);
+
+-- 관공서 전용 필드    작성일, 수정일, IP 실제로는 delete로 삭제 못함
+-- delyn char(1)	default 'N' 삭제시 -> 'Y'
+-- 실명인증
+
+INSERT INTO Persons (personid, lastname, firstname, address, city)
+VALUES (1, '김', '정호', '서울시 은평구', '서울시'),
+		(2, '이', '경규', '서울시 강남구', '서울시'),
+        (3, '박', '정권', '경기도 용인시', '용인시'),
+        (4, '정', '하림', '서울시 강서구', '서울시'),
+        (5, '문', '사랑', '경기도 광명시', '광명시');
+
+SELECT * FROM persons;
+
+CREATE TABLE persons2 AS SELECT * FROM persons;
+
+SHOW tables;
+
+DROP TABLE persons2;
+
+-- 수정 ALTER
+-- 필드 추가, 삭제는 잘 되는데 수정할 때 데이터가 있으면, 변경 후 데이터가 타입변경이 안될 경우 제약이 많다.
+
+-- ALTER TABLE 테이블명 ADD COLUMN명 데이터타입
+
+ALTER TABLE persons ADD phone varchar(40);
+ALTER TABLE persons ADD email varchar(40);
+
+DESC persons;
+
+-- 삭제: ALTER TABLE 테이블명 DROP 컬럼명
+ALTER TABLE persons DROP email;
+
+DESC persons;
+
+-- 데이터가 없을 경우는 형변환도 가능(수정, MODIFY) !
+ALTER TABLE persons MODIFY phone INT;
+
+/*
+제약조건
+
+NOT NULL : 필드에 NULL값이 들어가면 오류 발생
+UNIQUE : NULL값 허용, 중복 X
+PRIMARY KEY : NULL값 X, 중복 X
+FOREIGN KEY : 참조하는 테이블과 서로 연결돼있어서 서로 제약함
+CHECK : 특정범위의 값만 입력되어야 함(범위 제약)	ex) 성별:남녀만, 성적:1~100사이만
+DEFAULT : 아무값도 안 넣을 경우, 기본값이 들어감
+*/
+
+CREATE TABLE student
+(
+	id INT NOT NULL,
+    name VARCHAR(40) NOT NULL,
+    kor INT,
+    eng INT,
+    mat int
+);
+-- id, name에는 반드시 값을 넣어야 한다. (NOT NULL)
+INSERT INTO student(id, name) VALUES (1, '가'), (2, '나');
+
+CREATE TABLE persons2
+(
+	id INT NOT NULL,
+    lastname VARCHAR(20) NOT NULL,
+    firstname VARCHAR(30),
+    age INT,
+    UNIQUE(id)
+);
+
+INSERT INTO persons2 VALUES(1, '김', '민경', 33);
+INSERT INTO persons2 VALUES(1, '김', '성훈', 33); -- error 발생
+
+CREATE TABLE persons3
+(
+	id INT NOT NULL,
+    lastname VARCHAR(20) NOT NULL,
+    firstname VARCHAR(30),
+	age INT,
+    CONSTRAINT UC_Person UNIQUE(id, lastname)
+);
+
+INSERT INTO persons3 VALUES(1, '김', '민경', 33);
+INSERT INTO persons3 VALUES(1, '이', '성훈', 33);
+INSERT INTO persons3 VALUES(1, '김', '성훈', 33); -- error 발생
+select * from persons3;
+
+ALTER TABLE persons3 DROP INDEX UC_Person;
+
+USE information_schema;
+
+SELECT * FROM table_constraints WHERE table_name LIKE 'persons%';
+
+SELECT * FROM information_schema.TABLE_CONSTRAINTS;
+
+SHOW TABLES;
+
+
+
+
+ㅡㅡㅡㅡㅡㅡ
+CREATE DATABASE myproject DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE myproject;
+
+CREATE TABLE MEMBER
+(
+	seq INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    userid VARCHAR(40),
+    password VARCHAR(40),
+    username VARCHAR(40),
+    email VARCHAR(50),
+    wdate DATETIME
+);
+
+DESC member;
+
+INSERT INTO member(userid, password, username, email, wdate)
+VALUES('hong', '1234', '홍길동', 'hong@hanmail.net', now());
+INSERT INTO member(userid, password, username, email, wdate)
+VALUES('kim1', 'kim1', '김민정', 'kim@naver.com', now());
+INSERT INTO member(userid, password, username, email, wdate)
+VALUES('jjh1234', '1234', '정지현', 'wlgus@naver.com', now());
+INSERT INTO member(userid, password, username, email, wdate)
+VALUES('test1', 'test1234', '테진아', 'test@daum.net', now());
+INSERT INTO member(userid, password, username, email, wdate)
+VALUES('kang', 'wr123', '권웅기', 'gwon@naver.com', now());
+
+SELECT username, email FROM member WHERE userid='kang';
+
+UPDATE member SET password='kang90' WHERE userid='kang';
+
+-- mysql은 varchar(2000) 까지만 가능하다.
+CREATE TABLE board(
+	seq INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	userid VARCHAR(40),
+	title VARCHAR(40),
+	contents LONGTEXT,
+	wdate DATETIME
+);
+
+-- FOREIGN KEY가 되려면 그 필드가 PRIMARY KEY 또는 UNIQUE 제약조건이어야 한다.
+-- userid 필드가 unique 제약조건이 있어야 한다.
+--   └ 44,45 라인 둘 중 하나. 
+-- ALTER TABLE member ADD constraint UK_userid UNIQUE(userid);
+ALTER TABLE member ADD UNIQUE(userid);
+
+-- foreign key 추가
+ALTER TABLE board ADD CONSTRAINT FK_BOARD_MEMBER FOREIGN KEY(userid)
+REFERENCES MEMBER(userid);
+
+ALTER TABLE member DROP UK_userid;
+SELECT * FROM information_schema.table_constraints
+WHERE table_name = 'member';
+
+-- foreign key 추가
+ALTER TABLE board ADD CONSTRAINT FK_BOARD_MEMBER FOREIGN KEY(userid)
+REFERENCES member(userid);
+INSERT INTO board(userid, title, contents)
+VALUES('kang', '학원 가기 싫음', '비오면 더 싫음'),
+	   ('hong', 'C는 어려움', '그러게'),
+       ('sde', 'MFC는 더 짜증나', '대체 누가 만들었어');
+
+SELECT * FROM board;
+
+SELECT * FROM information
+
+USE myproject;
+
+INSERT INTO board SELECT * FROM mydb.board;
+SHOW TABLES;
+
+SELECT * FROM board;
+
+-- join
+SELECT A.seq, A.userid, B.username, B.email, A.title
+FROM board A
+LEFT OUTER JOIN member B ON A.userid=B.userid;
+
+SELECT A.seq, A.userid, (SELECT username FROM member b WHERE A.userid=B.userid) AS username
+, (SELECT email FROM member b WHERE A.userid=B.userid) AS email
+FROM board
+ORDER BY A.seq ASC;
+
+SELECT count(*) FROM member;
+
+
+
+
+

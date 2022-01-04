@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        background-color: violet;
+    }
+        /* p가 셀렉터이다. */
+    p{
+        color: darkgreen;
+        background-color: darkgray;
+        padding: 10px;
+    }
+
+    p#blue{     /* #은 id의 의미 */
+        color: blueviolet;
+    }
+
+    #blue{
+        color: cornflowerblue;
+    }
+
+    .center {   /* .은 클래스의 의미, id보다 클래스를 더 많이 씀 */
+        text-align: center;
+        color: red;
+    }
+
+    .large {
+        font-size: 16pt;
+    }
+
+    .background {
+        background-color: cornsilk;
+    }
+
+    *{  /* '*'은 일반적인 태그들에 적용 (but p태그가 우선) */
+        color: darkgray;
+    }
+
+    </style>
+</head>
+<body style="background-color: yellowgreen"> <!-- 여기 있는 style이 우선적으로 적용됨. -->
+                                                <!-- yellogreen > violet -->
+    <p class="center large background">파랗게</p> <!-- 클래스를 여러 개 동시에 적용 가능-->
+    <p id="blue">내 마음대로</p>
+    <p>하이잭</p> <!-- p태그가 우선이라 *태그가 적용되지 않고 p태그 적용 -->
+
+    <h3 id="blue">Waiting</h3> <!-- p태그에만 p#blue가 적용된다. h태그에는 #blue 적용. -->
+    <h3 class="center">방아쇠</h3>
+    <h3 class="center">주마등</h3>
+
+    <h1>타이드</h1>
+    <h2>feel like</h2>
+</body>
+</html>
+
+<script>
+    //자바스크립트에서 위에 html d의 모든 요소가 메모리 로딩되어지면
+    window.onload=function(){
+        //이 부분이 실행된다.
+        document.getElementById("blue").innerHTML="스웨터";
+        document.getElementsByClassName("center")[0].innerHTML="환승연애";
+        document.getElementsByClassName("center")[1].innerHTML="sour candy"; 
+        /*자바스크립트에서 id로 접근할 때 단일로 접근해야 함
+        자바스크립트에서 클래스로 접근할 때 배열로 접근해야 함*/
+    }
+</script>

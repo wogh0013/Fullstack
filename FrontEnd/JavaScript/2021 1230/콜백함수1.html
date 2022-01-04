@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    //함수도 변수의 일종이라서 함수를 매개변수로 전달할 수 있다.
+    function callFunction(call)
+    {
+        call(); //매개변수로 전달받은 함수를 호출 중
+    }
+
+    function display()
+    {
+        console.log("callback 함수입니다.")
+    }
+
+    function guguda()
+    {
+        for(i=1; i<=10; i++)
+        {
+            console.log(`4 X ${i} = ${4*i}`);
+        }
+    }
+
+    //display를 직접 호출하지 않고, callFunction에게 전달한다. (간접호출)
+    callFunction(display);
+    callFunction(gugudan);
+
+</script>

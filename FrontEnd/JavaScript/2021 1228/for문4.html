@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    시간 당 급여 : <input type="text" id="weekpay"> <br>
+    근무 시간 : <input type="text" id="worktime"> <br>
+
+    <button type="button" onclick="goPay()">주급 계산</button>
+    <div id="perPay"></div>
+
+</body>
+</html>
+
+<script>
+    //주급계산 : 시간 당 급여
+    //           근무시간
+    //주급은 300000 원입니다.
+    function goPay()
+    {
+        var weekpay = document.getElementById("weekpay").value;
+        var worktime = document.getElementById("worktime").value;
+        var perPay="";
+
+        for(i=1; i<=7; i++)
+            perPay = `${weekpay*worktime*i}`;
+        document.getElementById("perPay").innerHTML = perPay;     
+    }
+    
+</script>

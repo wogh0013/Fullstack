@@ -1,0 +1,24 @@
+db에서 데이터를 읽어올 때
+                                                접속
+1. db에 접속하기(네트워크)          웹서버 -----------------> DB서버
+                                          <----------------
+                                                응답(시간이 오래 걸림)
+
+자바는 동기식 처리를 한다.
+
+ResultSet rs = stmt.executeQuery(sql); DB접속해서 데이터를 읽어와야 함수가 종료한다.(동기식)
+
+nodejs(자바스크립트) - 비동기식 처리
+
+stmt.execute(sql, function(data){
+    출력
+});
+
+-- 콜백의 지옥
+stmt.execute(sql1, function(data){
+    stmt.execute(sq2, function(data){
+        stmt.execute(sql3, function(data){
+            ........
+        })
+    })
+});

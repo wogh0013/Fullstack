@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    현재 데이터 개수 <div id="result"></div>
+    <table style="width:80%; border-top:1px solid blue">
+        <colgroup>
+            <col width="*">
+            <col width="20%">
+            <col width="20%">
+            <col width="20%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <th>이름</th>
+            <th>국어</th>
+            <th>영어</th>
+            <th>수학</th>
+            <th>총점</th>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    //JSON타입
+    let students =[
+        {name:"홍길동", kor:100, eng:100, mat:90},
+        {name:"임꺽정", kor:95, eng:90, mat:85},
+        {name:"김민지", kor:70, eng:60, mat:90},
+        {name:"박형근", kor:75, eng:55, mat:100},
+        {name:"이익현", kor:80, eng:90, mat:100},
+        {name:"강형욱", kor:65, eng:85, mat:70}
+    ];
+
+    //forEach - 각 개별요소마다 반복한다
+    students.forEach(obj=>{
+        obj["total"] = obj.kor + obj.eng + obj.mat;
+    });
+
+    function loadData()
+    {
+        //테이블에 추가하기
+        //1. tbody 태그에 대한 참조를 가져온다.
+        tbody = document.getElementById("tbody");
+
+        students.forEach(obj=>{
+            //1.새로운 행을 만든다.
+            var row = tbody.insertRow(tbody.rows.length); //첫 번째 위치에 새로운 행이 추가된다. 행 자체에 대한 객체를 반환한다.
+            //tr태그를 자바스크립트로 만드는 문장
+            var cell1 = row.insertCell(0); //td태그를 만든다.
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
+            var cell3 = row.insertCell(4);
+            //td태그라서 내용을 바꾸고 싶으면 innerHTML을 사용해야 한다.
+            cell1.innerHTML = obj.name;
+            cell2.innerHTML = obj.kor;
+            cell3.innerHTML = obj.eng;
+            cell3.innerHTML = obj.mat;
+            cell3.innerHTML = obj.total;
+        });
+
+        document.getElementById("result").innerHTML = tbody.rows.length;
+    }
+
+    //문서가 모두 메모리에 로딩되면 이벤트 문서를 다 불러왔다.
+    window.onload=loadData;
+</script>

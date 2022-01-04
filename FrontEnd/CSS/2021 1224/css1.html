@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: khaki;
+        }
+
+        h1{
+            color:lightcoral;
+            background-color: lightslategray;
+            padding:10px;
+            text-align: center;
+        }
+
+        p{
+            border:1px solid red;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #title{
+            color: mediumblue;
+            font-size: 24;
+        }
+
+        .class1{
+            color: olive;
+            font-size:20pt;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">스타일 적용하기</h1>
+
+    <p id="title">p태그에 동일하게 적용됩니다.</p>
+    <p class="class1">p태그에 동일하게 적용됩니다.</p>
+    <p class="class1">p태그에 동일하게 적용됩니다.</p>
+    <p class="class1">p태그에 동일하게 적용됩니다.</p>
+    <p>p태그에 동일하게 적용됩니다.</p>
+
+</body>
+</html>
+
+<script>
+    document.getElementById("title").innerHTML="getElementById";
+    document.getElementsByClassName("class1")[0].innerHTML="첫 번째 거";
+    document.getElementsByClassName("class1")[1].innerHTML="두 번째 거";
+    document.getElementsByClassName("class1")[2].innerHTML="세 번째 거";
+</script>
+
