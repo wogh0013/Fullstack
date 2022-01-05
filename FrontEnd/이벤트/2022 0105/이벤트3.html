@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    x : <input type="text" name="xvalue" id="xvalue">  <br>
+    y : <input type="text" name="yvalue" id="yvalue">  <br><br>
+    
+    <!--옛날버전-->
+    <button type="button" onclick="go('1')">더하기</button> &nbsp;&nbsp;
+    <button type="button" onclick="go('2')">빼기</button> &nbsp;&nbsp;
+    <button type="button" onclick="go('3')">곱하기</button> &nbsp;&nbsp;
+    <button type="button" onclick="go('4')">나누기</button> <br/>
+
+    <!--이후버전-->
+    <button type="button" id="btnAdd">더하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnSub">빼기</button> &nbsp;&nbsp;
+    <button type="button" id="btnMul">곱하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnDiv">나누기</button> <br/>
+    
+
+    <span id="result"></span>
+</body>
+</html>
+
+<script>
+    function go(gubun){
+        let x = document.getElementById("xvalue").value;
+        let y = document.getElementById("yvalue").value;
+        let result=0;
+        if (gubun=='1')
+            result = parseInt(x) + parseInt(y);
+        else if(gubub=='2')
+            result = parseInt(x) - parseInt(y);
+        else if(gubun=='3')
+            result = parseInt(x) * parseInt(y);
+        else
+            result = parseInt(x) / parseInt(y);
+        
+        document.getElementById("result").innerHTML = result;
+    }
+
+</script>
