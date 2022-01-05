@@ -1,1 +1,65 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    x : <input type="text" name="xvalue" id="xvalue">  <br>
+    y : <input type="text" name="yvalue" id="yvalue">  <br><br>
+
+    <button type="button" id="btnAdd">더하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnSub">빼기</button> &nbsp;&nbsp;
+    <button type="button" id="btnMul">곱하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnDiv">나누기</button> <br/><br/>
+
+    <span id="result"></span>
+</body>
+</html>
+
+<script>
+   var btnAdd = document.getElementById("btnAdd");
+   var btnSub = document.getElementById("btnSub");
+   var btnMul = document.getElementById("btnMul");
+   var btnDiv = document.getElementById("btnDiv");
+   
+   btnAdd.addEventListener("click", go );
+   btnSub.addEventListener("click", go );
+   btnMul.addEventListener("click", go );
+   btnDiv.addEventListener("click", go );
+   
+   //이벤트핸들러 함수들이 기본적으로 가지고 있는 매개변수 
+   //자바같은 경우에는 매개변수 생략을 하면 함수 호출도 안되고, 에러나는데 
+   //자바스크립트는 많이 느슨하다 
+   //매개변수로 이벤트가 발생한 개체에 대한 참조가 제공된다.  
+   function go( e ){
+
+        console.log( e.target );
+        console.log( e.target.id );
+        var x = parseInt(document.getElementById("xvalue").value);
+        var y = parseInt(document.getElementById("yvalue").value);
+        var result =0;
+        if(e.target.id == "btnAdd")
+        {
+            result = x+y;
+        }
+        else if(e.target.id == "btnSub")
+        {
+            result = x-y;
+        }
+        else if(e.target.id == "btnMul")
+        {
+            result = x*y;
+        }
+        else 
+        {
+            result = x/y;
+        }
+        document.getElementById("result").innerHTML=result;
+    }
+ 
+
+</script>
