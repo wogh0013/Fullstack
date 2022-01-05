@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btnColor1" style="background-color: aqua;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor2" style="background-color: blue;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor3" style="background-color: red;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor4" style="background-color: magenta;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor5" style="background-color: maroon;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor6" style="background-color: green;" onclick="changeBackground(this)">배경색</button><br>
+    <button class="btnColor7" style="background-color: lightcoral;" onclick="changeBackground(this)">배경색</button>
+
+</body>
+</html>
+
+<script>
+    //DOM구조가 완성됐을 때 호출되는 이벤트 핸들러
+    window.onload = function()
+    {
+        var i;
+        for(i=1; i<=7; i++)
+        {
+            var btnColor = document.getElementById("btnColor"+i);
+            btnColor.addEventListener("click", changeBackground);
+        }
+    }
+
+    function changeBackground(me){
+        document.getElementsByTagName("body")[0].style.backgroundColor=me.style.backgroundColor;
+    }
+</script>
