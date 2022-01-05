@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    숫자만 : <input type="number" name="" id="">
+
+    숫자만 : <input type="text" name="" id="" onlypress="inNumber()"> <br/>
+
+    숫자만 : <input type="text" name="" id="" oninput="this.value=this.value.replace(/[^0-9]/g, '');"/>
+
+    <button>입력</button>
+</body>
+</html>
+
+<script>
+    function inNumber() //한글 키 상태에서 무용지물
+    {
+        if(event.keyCode<48 || event.keyCode>57)
+            event.returnValue=false; //화면에 값이 출력되는 것을 막는다.
+    }
+</script>
+
