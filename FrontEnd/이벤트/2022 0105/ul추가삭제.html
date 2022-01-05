@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" name="product" id="product" onkeydown="onKeyDown()">
+    <button type="button" id="btnAdd">추가</button>
+    <button type="button" id="btnDel">삭제</button>
+
+    <ul id="coffee">
+        <li>카카오</li>
+    </ul>
+</body>
+</html>
+
+<script>
+    window.onload=function(){
+        document.getElementById("btnAdd").addEventListener("click", funAdd);
+        document.getElementById("btnDel").addEventListener("click", funDel);
+    }
+
+    function onKeyDown()
+    {
+        if(event.keyCode==13) //13이 Enter키임
+        {
+            funAdd();
+        }
+    }
+
+    function funAdd(){
+        var coffee = document.getElementById("coffee");
+        //새로운 항목 추가 = 꼭 해당 ul객체를 통하지 않고 li를 만들어서
+        var child = document.createElement("li");
+        child.innerHTML = document.getElementById("product").value;
+        //해당 부모의 자식으로 붙인다.
+        coffee.appendChild(child);
+        document.getElementById("product").value=""; //입력창은 데이터 입력하고 나면 비워야 한다.
+    }
+
+    function funDel(){
+        var coffee = document.getElementById("coffee");
+        console.log(coffee.children.length);
+        console.log(coffee.children);
+
+        if(coffee.children.length>1)
+            coffee.removeChild(coffee.lastChild);
+        else
+            alert('더 이상 삭제 불가');
+    }
+</script>
