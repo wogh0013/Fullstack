@@ -14,12 +14,12 @@
 </head>
 <body>
     이름 : <input type="text" id="name" name="name"> <br>
-    국어 : <input type="text" id="name" name="kor"> <br>
-    영어 : <input type="text" id="name" name="eng"> <br>
-    수학 : <input type="text" id="name" name="mat"> <br>
+    국어 : <input type="text" id="kor" name="name"> <br>
+    영어 : <input type="text" id="eng" name="name"> <br>
+    수학 : <input type="text" id="mat" name="name"> <br>
 
-    <button type="button" id="btnAdd">추가</button> &nbsp;&nbsp;
-    <button type="button" id="btnDel">삭제</button> &nbsp;&nbsp;
+    <button id="btnAdd" type="button">추가</button> &nbsp;&nbsp;
+    <button id="btnDel" type="button">삭제</button> &nbsp;&nbsp;
 
     <br><br>
 
@@ -47,7 +47,7 @@
 
 <script>
 
-    window.onload=()=>{
+    window.onload = ()=>{
         document.getElementById("btnAdd").addEventListener("click", funAdd);
         document.getElementById("btnDel").addEventListener("click", funDel);
         init(); //추가하고 나서 각 input 객체의 value 값들을 삭제
