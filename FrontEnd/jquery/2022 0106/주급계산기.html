@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+    근무 시간 : <input type="text" id="workTime"> <br>
+    시간 당 급여액 : <input type="text" id="weekPay"> &nbsp;
+    <button type="button" id="btnCalc">계산하기</button> <br><br>
+    
+    <span id="result"></span> <br>
+</body>
+</html>
+
+<script>
+    $(function(){
+        $("#btnCalc").click(()=>{
+            var t = $("#workTime").val();
+            var w = $("#weekPay").val();
+
+            result = parseInt(t) * parseInt(w) * 7;
+            $("#result").html(`주급은 ${result}원입니다.`);
+        });
+    });
+
+</script>
