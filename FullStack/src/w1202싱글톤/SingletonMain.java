@@ -27,5 +27,7 @@ public class SingletonMain {
 		s.x = 10;
 		Singleton s2 = Singleton.getInstance();
 		System.out.println(s2.x);
+		
+		
 	}
 }
