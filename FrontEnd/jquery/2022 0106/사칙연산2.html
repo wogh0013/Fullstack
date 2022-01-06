@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    x : <input type="text" id="xvalue"> <br>
+    y : <input type="text" id="yvalue"> <br>
 
+    result : <input type="text" id="result"> <br><br>
+
+    <button type="button" id="btnAdd">더하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnSub">빼기</button>   &nbsp;&nbsp;
+    <button type="button" id="btnMul">곱하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnDiv">나누기</button> &nbsp;&nbsp;
+
+</body>
+</html>
+
+<script>
+    
+    $(function(){
+        //시작하자마자 calc('+') 결과상태를 가지고 함수를 줘서 나중에 호출하려고 해야 한다
+        //함수 자체를 호출하면 안 된다
+        $("#btnAdd").click(()=>{calc('+')}); 
+        $("#btnSub").click(()=>{calc('-')});
+        $("#btnMul").click(()=>{calc('*')});
+        $("#btnDiv").click(()=>{calc('/')});
+    });
+
+    function calc(oper) //외부에 함수를 만들자
+    {
+        x = $("#xvalue").val();
+        y = $("#yvalue").val();
+
+        if(oper == "+")
+            result = parseInt(x) + parseInt(y);
+        else if(oper == "-")
+            result = parseInt(x) + parseInt(y);
+        else if(oper == "*")
+            result = parseInt(x) * parseInt(y);
+        else if(oper == "/")
+            result = parseInt(x) / parseInt(y);
+            
+        $("#result").val(result);
+    };
+</script>
