@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    x : <input type="text" id="xvalue"> <br>
+    y : <input type="text" id="yvalue"> <br>
+
+    result : <input type="text" id="result"> <br><br>
+
+    <button type="button" id="btnAdd">더하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnSub">빼기</button>   &nbsp;&nbsp;
+    <button type="button" id="btnMul">곱하기</button> &nbsp;&nbsp;
+    <button type="button" id="btnDiv">나누기</button> &nbsp;&nbsp;
+
+</body>
+</html>
+
+<script>
+    $(function(){
+        
+        $("#btnAdd").click(()=>{
+            x = $("#xvalue").val(); //jquery로 접근 시 val(), html()을 써야 한다.
+            y = $("#yvalue").val();
+
+            result = parseInt(x) + parseInt(y);
+            // alert(result);
+            $("#result").val(result);
+        });
+
+        $("#btnSub").click(()=>{
+            x = $("#xvalue").val();
+            y = $("#yvalue").val();
+
+            result = parseInt(x) - parseInt(y);
+            $("#result").val(result);
+        });
+
+        $("#btnMul").click(()=>{
+            x = $("#xvalue").val();
+            y = $("#yvalue").val();
+
+            result = parseInt(x) * parseInt(y);
+            $("#result").val(result);
+        });
+
+        $("#btnDiv").click(()=>{
+            x = $("#xvalue").val();
+            y = $("#yvalue").val();
+
+            result = parseInt(x) / parseInt(y);
+            $("#result").val(result); 
+        });
+
+    });
+
+</script>
