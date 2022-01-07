@@ -22,8 +22,8 @@ method - 전송방식을 지정한다. get, post가 있는데
 		 서버와 클라이언트 간 http 프로토콜의 정보 전달 방식은 먼저 header라는 패킷을 보내고 나중에 body라는 패킷을 보낸다.
 		 header에는 브라우저 정보나 운영체제 정보 등 비교적 간단한 정보를 보내고,
 		 body에는 1000바이트 이상의 데이터들, 파일, 이미지, 그리고 텍스트 등을 전송한다.
-		 post 방식은 header와 body를 둘 다 보내고,
-		 get 방식은 header만 보낸다.
+		 get 방식은 header만 보내고,
+		 post 방식은 header와 body를 둘 다 보낸다.
 -->
 <form name="form" action="./receive.jsp">
 	아이디 : <input type="text" name="userid">
