@@ -7,13 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form name="myform" id="myform"></form>
+	<form name="myform" id="myform">
 		이름 : <input type="text" name="name" id="name"> <br/>
 		근무시간 : <input type="text" name="work_time" id="work_time"> <br/>
 		시간당 급여액 : <input type="text" name="per_pay" id="per_pay"> &nbsp;
 		
 		<button type="button" id="btnCall" onclick="loadDoc()">계산하기</button>
-		
 	</form>
 	<div id="demo"></div>
 </body>
