@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <button v-on:click="reverseMessage">업데이트 호출</button>
+        <!-- v-on:click="수식", v-on:click="함수명" 함수호출이 되기도 한다. -->
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            message:"Hello Vue"
+        },
+        methods:{
+            reverseMessage:function(){
+                var temp1 = this.message.split(''); //모든 문자를 하나씩 쪼갠다
+                console.log(temp1);
+                var temp2 = temp1.reverse(); //배열을 뒤집는다
+                console.log(temp1);
+                var temp3 = temp2.join(''); //배열을 다시 문자열로 합친다
+                this.message = temp3;
+            }
+        }
+    });
+</script>
