@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        일한 시간: <input v-model="work_time"> <br>
+        시간당 급여: <input v-model="work_pay"> <br>
+        주급은 : <span>{{result}}</span> <br>
+
+        <button v-on:click="calc">주급계산</button>
+    </div>
+</body>
+</html>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            work_time:0, work_pay:0, result:0
+        },
+        methods:{
+            calc:function(){this.result=this.work_time * this.work_pay;}
+        }
+    });
+</script>
