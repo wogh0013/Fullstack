@@ -1,0 +1,34 @@
+<!--성적처리-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src = "https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id = "app">
+        이름:<input v-model="name"> <br> <!-- input태그와 변수연결은 v-model="변수명" -->
+        국어:<input v-model="kor"> <br> <!-- input태그와 변수연결은 v-model="변수명" -->
+        영어:<input v-model="eng"> <br>
+        수학:<input v-model="math"> <br>
+        <span>{{name}}님의 평균은 {{result}}</span> <br>
+
+        <button v-on:click="avg">평균계산하기</button>
+ 
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:"#app",
+        data:{name:"",kor:0,eng:0,math:0,result:0},  //변수선언
+        methods: {
+            //화살표함수에서 this를 못써서 화살표 함수 사용못함
+            avg:function(){ this.result = (parseInt(this.kor) + parseInt(this.eng)+ parseInt(this.math))/3;},
+
+        }
+    });
+</script>
