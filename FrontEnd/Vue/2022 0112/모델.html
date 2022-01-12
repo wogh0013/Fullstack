@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- input 태그와 변수 연결은 v-model="변수명" -->
+        <input v-model="message"> <br>
+        <span>{{message}}</span>
+    </div>
+</body>
+</html>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            message:""
+        }
+    })
+</script>
