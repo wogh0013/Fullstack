@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>꽃</h3>
+        <ul>
+            <!-- 반복될 항목 : v-for="항목 in 배열" 
+                배열로부터 차례대로 항목이라는 변수에 값을 하나씩 가져온다-->
+            <li v-for="f in flowers">{{f}}</li>
+        </ul>
+
+        <h3>커피</h3>
+            <ul>
+                <li v-for="c in coffees">{{c}}</li>
+            </ul>
+    </div>
+</body>
+</html>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            flowers:["작약", "백일홍", "천일홍", "접시꽃", "맨드라미", "목단", "국화"],
+            coffees:["아메리카노", "카페모카", "카라멜마키아또", "카페라떼", "에스프레소", "아인슈페너"]
+        }
+    });
+</script>
