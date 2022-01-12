@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <span v-for="p in persons">
+            {{p.id}}  {{p.name}}  {{p.phone}}  {{p.email}} <br>
+        </span>
+
+        <table>
+            <thead>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>이메일</th>
+            </thead>
+            <tbody>
+                <tr v-for="p in persons">
+                    <td>{{p.id}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.phone}}</td>
+                    <td>{{p.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            persons:[
+                {id:1, name:"홍길동", phone:"010-0000-0001", email:"hong@naver.com"},
+                {id:2, name:"임꺽정", phone:"010-0000-0002", email:"lim@naver.com"},
+                {id:3, name:"장길산", phone:"010-0000-0003", email:"jang@naver.com"},
+                {id:4, name:"이정옥", phone:"010-0000-0004", email:"lee@naver.com"},
+                {id:5, name:"홍경래", phone:"010-0000-0005", email:"hong2@naver.com"},
+            ]
+        }
+    });
+</script>
