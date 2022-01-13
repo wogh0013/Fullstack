@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <component-grade></component-grade>
+    </div>
+</body>
+</html>
+
+<script>
+    //컴포넌트 내에서 어떻게 이벤트를 처리할 것인가
+    //컴포넌트에서 데이터를 저장하려면 그냥 json 객체를 넣으면 안되고
+    //콜백함수를 주고, 구문 안에 변수를 써야 한다.
+    Vue.component('component-grade', {
+        data: function(){
+            return{
+                kor:0, eng:0, mat:0, sum:0, avg:0
+            }
+        },
+
+        //여러 태그를 한 꺼번에 둘 때에는 감싸주는 태그가 필요하다. <div>
+        template:`
+        <div>
+            kor : <input v-model="kor"> <br/>
+            eng : <input v-model="eng"> <br/>
+            mat : <input v-model="mat"> <br/>
+            <button v-on:click="onSum">합계 구하기</button> <br/>
+            <span> 합계 : {{sum}} </span> <br/>
+            <button v-on:click="onAvg">평균 구하기</button> <br/>
+            <span> 평균 : {{avg}} </span> <br/>
+        </div>
+        `,
+        methods:{
+            onSum:function(){
+                if(this.kor > 100 || this.eng > 100 || this.mat > 100)
+                {
+                    alert("100 이하의 숫자를 입력해주세요.");
+                    return;
+                }
+                else if(this.kor < 0 || this.eng < 0 || this.mat < 0)
+                {
+                    alert("0 이상의 숫자를 입력해주세요.");
+                    return;
+                }
+                this.sum = parseInt(this.kor) + parseInt(this.eng) + parseInt(this.mat);
+            },
+            onAvg:function(){
+                this.avg = this.sum / 3.0;
+            }
+        }
+    });
+
+    new Vue({
+        el:"#app",
+        data:{
+
+        }
+    });
+</script>
