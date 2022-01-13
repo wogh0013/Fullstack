@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 컴포넌트를 v-for를 써서 여러 개 사용하기 -->
+            <shopping-item v-for="g in groceryList" v-bind:shopping="g"></shopping-item>
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+    Vue.component('shopping-item',{
+        props:["shopping"],
+        template: '<li>{{shopping.id}} {{shopping.text}}</li>'
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            groceryList:[
+                {id:0, text:"Vegetable"},
+                {id:1, text:"Cheese"},
+                {id:2, text:"Milk"},
+                {id:3, text:"Coffee"}
+            ]
+        }
+    });
+</script>
